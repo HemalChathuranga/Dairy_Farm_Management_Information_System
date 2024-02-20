@@ -12,24 +12,25 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        
+        $data['headerTitle'] = 'Dashboard';
+
         if(Auth::user()->role == 'Admin'){
-            return view('admin.dashboard');
+            return view('admin.dashboard', $data);
         }
         elseif(Auth::user()->role == 'Manager'){
-            return view('manager.dashboard');
+            return view('manager.dashboard', $data);
         }
         elseif(Auth::user()->role == 'Office Staff'){
-            return view('officeStaff.dashboard');
+            return view('officeStaff.dashboard', $data);
         }
         elseif(Auth::user()->role == 'Medical Staff'){
-            return view('medicalStaff.dashboard');
+            return view('medicalStaff.dashboard', $data);
         }
         elseif(Auth::user()->role == 'Field Staff'){
-            return view('fieldStaff.dashboard');
+            return view('fieldStaff.dashboard', $data);
         }
         elseif(Auth::user()->role == 'Stores Staff'){
-            return view('storesStaff.dashboard');
+            return view('storesStaff.dashboard', $data);
         }
 
     }

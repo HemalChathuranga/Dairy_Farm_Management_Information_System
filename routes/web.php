@@ -20,6 +20,10 @@ use Illuminate\Support\Facades\Route;
 //     return view('message');
 // });
 
+Route::get('admin/admin/list', function () {
+    return view('admin.admin.list');
+});
+
 // <--- User Authentication Routes --->
 Route::get('/', [AuthController::class, 'login']);
 Route::post('login', [AuthController::class, 'authLogin']);

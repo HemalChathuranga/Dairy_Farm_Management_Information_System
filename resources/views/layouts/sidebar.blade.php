@@ -27,15 +27,15 @@
           <!-- Admin Sidebar Menu -->
           @if (Auth::user()->role == 'Admin')
               <li class="nav-item">
-                <a href="{{ url('admin/dashboard') }}" class="nav-link">
+                <a href="{{ url('admin/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') ? active @endif">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
-                    Dashboard
+                    Dashboard {{ Request::segment(2) }}
                   </p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url('admin/admin/list') }}" class="nav-link">
+                <a href="{{ url('admin/admin/list') }}" class="nav-link @if(Request::segment(2) == 'admin') ? active @endif">
                   <i class="nav-icon fas fa-user-tie"></i>
                   <p>
                     Admin
@@ -43,7 +43,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url('') }}" class="nav-link">
+                <a href="{{ url('') }}" class="nav-link @if(Request::segment(2) == 'profile') ? active @endif">
                   <i class="nav-icon fas fa-address-card"></i>
                   <p>
                     Profile
@@ -62,7 +62,7 @@
           <!-- Manager Sidebar Menu -->
           @elseif (Auth::user()->role == 'Manager')
               <li class="nav-item">
-                <a href="{{ url('manager/dashboard') }}" class="nav-link">
+                <a href="{{ url('manager/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') ? active @endif">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     Dashboard
@@ -70,7 +70,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url('') }}" class="nav-link">
+                <a href="{{ url('') }}" class="nav-link @if(Request::segment(2) == 'profile') ? active @endif">
                   <i class="nav-icon fas fa-address-card"></i>
                   <p>
                     Profile
@@ -89,7 +89,7 @@
           <!-- Office Staff Sidebar Menu -->
           @elseif (Auth::user()->role == 'Office Staff')
               <li class="nav-item">
-                <a href="{{ url('officeStaff/dashboard') }}" class="nav-link">
+                <a href="{{ url('officeStaff/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') ? active @endif">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     Dashboard
@@ -97,7 +97,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url('') }}" class="nav-link">
+                <a href="{{ url('') }}" class="nav-link @if(Request::segment(2) == 'profile') ? active @endif">
                   <i class="nav-icon fas fa-address-card"></i>
                   <p>
                     Profile
@@ -116,7 +116,7 @@
           <!-- Medical Staff Sidebar Menu -->
           @elseif (Auth::user()->role == 'Medical Staff')
               <li class="nav-item">
-                <a href="{{ url('medicalStaff/dashboard') }}" class="nav-link">
+                <a href="{{ url('medicalStaff/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') ? active @endif">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     Dashboard
@@ -124,7 +124,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url('') }}" class="nav-link">
+                <a href="{{ url('') }}" class="nav-link @if(Request::segment(2) == 'profile') ? active @endif">
                   <i class="nav-icon fas fa-address-card"></i>
                   <p>
                     Profile
@@ -143,7 +143,7 @@
           <!-- Field Staff Sidebar Menu -->
           @elseif (Auth::user()->role == 'Field Staff')
               <li class="nav-item">
-                <a href="{{ url('fieldStaff/dashboard') }}" class="nav-link">
+                <a href="{{ url('fieldStaff/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') ? active @endif">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     Dashboard
@@ -151,7 +151,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url('') }}" class="nav-link">
+                <a href="{{ url('') }}" class="nav-link @if(Request::segment(2) == 'profile') ? active @endif">
                   <i class="nav-icon fas fa-address-card"></i>
                   <p>
                     Profile
@@ -170,7 +170,7 @@
           <!-- Stores Staff Sidebar Menu -->
           @elseif (Auth::user()->role == 'Stores Staff')
               <li class="nav-item">
-                <a href="{{ url('storesStaff/dashboard') }}" class="nav-link">
+                <a href="{{ url('storesStaff/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') ? active @endif">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
                     Dashboard
@@ -178,7 +178,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url('') }}" class="nav-link">
+                <a href="{{ url('') }}" class="nav-link @if(Request::segment(2) == 'profile') ? active @endif">
                   <i class="nav-icon fas fa-address-card"></i>
                   <p>
                     Profile
