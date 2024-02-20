@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('mobile_number');
             $table->text('address');
             $table->string('email')->unique();
-            $table->string('photo')->nullable();
+            $table->string('prof_pic')->nullable();
             $table->enum('role', ['Admin','Manager','Office Staff','Medical Staff', 'Field Staff', 'Stores Staff', 'User'])->default('User');
             $table->enum('status', ['Active','Inactive'])->default('Active');
             $table->timestamp('email_verified_at')->nullable();

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
@@ -25,58 +26,38 @@ Route::post('login', [AuthController::class, 'authLogin']);
 Route::get('logout', [AuthController::class, 'authLogout']);
 
 
-
-
-
-Route::get('admin/admin/list', function () {
-    return view('admin.admin.list');
-});
-
-
+// <--- Admin Middleware Group -->
 Route::group(['middleware' => 'admin'], function(){
-
-    Route::get('admin/dashboard', function () {
-        return view('admin.dashboard');
-    });
+    Route::get('admin/dashboard', [DashboardController::class, 'index']);
 
 });
 
+// <--- Manager Middleware Group -->
 Route::group(['middleware' => 'manager'], function(){
-
-    Route::get('manager/dashboard', function () {
-        return view('admin.dashboard');
-    });
+    Route::get('manager/dashboard', [DashboardController::class, 'index']);
     
 });
 
+// <--- Office Staff  Middleware Group -->
 Route::group(['middleware' => 'officeStaff'], function(){
-
-    Route::get('officeStaff/dashboard', function () {
-        return view('admin.dashboard');
-    });
+    Route::get('officeStaff/dashboard', [DashboardController::class, 'index']);
     
 });
 
+// <--- Medical Staff Middleware Group -->
 Route::group(['middleware' => 'medicalStaff'], function(){
-
-    Route::get('medicalStaff/dashboard', function () {
-        return view('admin.dashboard');
-    });
+    Route::get('medicalStaff/dashboard', [DashboardController::class, 'index']);
     
 });
 
+// <--- Field Staff  Middleware Group -->
 Route::group(['middleware' => 'fieldStaff'], function(){
-    
-    Route::get('fieldStaff/dashboard', function () {
-        return view('admin.dashboard');
-    });
+    Route::get('fieldStaff/dashboard', [DashboardController::class, 'index']);
     
 });
 
+// <--- Stores Staff Middleware Group -->
 Route::group(['middleware' => 'storesStaff'], function(){
-
-    Route::get('storesStaff/dashboard', function () {
-        return view('admin.dashboard');
-    });
+    Route::get('storesStaff/dashboard', [DashboardController::class, 'index']);
     
 });
