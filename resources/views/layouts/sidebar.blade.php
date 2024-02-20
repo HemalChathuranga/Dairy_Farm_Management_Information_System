@@ -30,7 +30,7 @@
                 <a href="{{ url('admin/dashboard') }}" class="nav-link @if(Request::segment(2) == 'dashboard') ? active @endif">
                   <i class="nav-icon fas fa-tachometer-alt"></i>
                   <p>
-                    Dashboard {{ Request::segment(2) }}
+                    Dashboard
                   </p>
                 </a>
               </li>

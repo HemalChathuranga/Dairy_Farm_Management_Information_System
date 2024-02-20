@@ -1,8 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +20,6 @@ use Illuminate\Support\Facades\Route;
 //     return view('message');
 // });
 
-Route::get('admin/admin/list', function () {
-    return view('admin.admin.list');
-});
 
 // <--- User Authentication Routes --->
 Route::get('/', [AuthController::class, 'login']);
@@ -33,6 +30,16 @@ Route::get('logout', [AuthController::class, 'authLogout']);
 // <--- Admin Middleware Group -->
 Route::group(['middleware' => 'admin'], function(){
     Route::get('admin/dashboard', [DashboardController::class, 'index']);
+    Route::get('admin/admin/list', [AdminController::class, 'index']);
+    Route::get('admin/admin/add', [AdminController::class, 'create']);
+    Route::post('admin/admin/add', [AdminController::class, 'store']);
+    Route::get('admin/admin/{id}/view', [AdminController::class, 'show']);
+    Route::get('admin/admin/{id}/edit', [AdminController::class, 'edit']);
+    Route::post('admin/admin/{id}/edit', [AdminController::class, 'update']);
+    Route::get('admin/admin/{id}/delete', [AdminController::class, 'destroy']);
+    
+    
+
 
 });
 

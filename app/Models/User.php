@@ -18,8 +18,19 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'emp_id',
+        'first_name',
+        'last_name',
+        'birth_date',
+        'gender',
+        'joined_date',
+        'nic',
+        'mobile_number',
+        'address',
         'email',
+        'prof_pic',
+        'role',
+        'status',
         'password',
     ];
 
@@ -42,4 +53,17 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    static public function getAdminRec(){
+
+        return self::SELECT('users.*')
+                    ->WHERE('users.role','=','Admin')
+                    ->ORDERBY('id', 'asc')
+                    ->get();
+    }
+
+    static public function getRecByID($id){
+
+        return self::findOrFail($id);
+    }
 }
