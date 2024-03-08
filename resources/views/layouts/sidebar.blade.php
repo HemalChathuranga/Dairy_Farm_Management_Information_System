@@ -13,7 +13,7 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{ Auth::user()->prof_pic }}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{ '\uploads\profile_img\\' . Auth::user()->prof_pic }}" style="width:30px; hight:30px;" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
           <a href="#" class="d-block">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</a>
@@ -36,9 +36,17 @@
               </li>
               <li class="nav-item">
                 <a href="{{ url('admin/admin/list') }}" class="nav-link @if(Request::segment(2) == 'admin') ? active @endif">
-                  <i class="nav-icon fas fa-user-tie"></i>
+                  <i class="nav-icon fas fa-user-shield"></i>
                   <p>
                     Admin
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('') }}" class="nav-link @if(Request::segment(2) == 'manager') ? active @endif">
+                  <i class="nav-icon fas fa-user-tie"></i>
+                  <p>
+                    Manager
                   </p>
                 </a>
               </li>

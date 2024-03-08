@@ -50,7 +50,8 @@
 
                   @foreach ($fetchedRecord as $item)
                       <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        {{-- <td>{{ $loop->iteration }}</td> --}}
+                        <td>{{ ($fetchedRecord->currentPage() == 1) ? $loop->iteration : ($loop->iteration + 5) }}</td>
                         <td>{{ $item->emp_id }}</td>
                         <td>{{ $item->first_name . ' ' . $item->last_name }}</td>
                         <td>{{ $item->email }}</td>
@@ -63,17 +64,18 @@
                         </td>
                       </tr>
                   @endforeach
-
-
-
-                    
-                    
                   </tbody>
                 </table>
               </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
+
+            <!-- Pagination -->
+            <div>
+              {{ $fetchedRecord->links('pagination::bootstrap-5') }}
+            </div>
+
           </div>
         </div>
       </div><!-- /.container-fluid -->

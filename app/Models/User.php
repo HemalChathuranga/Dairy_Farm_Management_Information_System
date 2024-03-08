@@ -59,7 +59,7 @@ class User extends Authenticatable
         return self::SELECT('users.*')
                     ->WHERE('users.role','=','Admin')
                     ->ORDERBY('id', 'asc')
-                    ->get();
+                    ->paginate(5);
     }
 
     static public function getRecByID($id){
