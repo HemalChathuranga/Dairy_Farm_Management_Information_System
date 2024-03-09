@@ -16,6 +16,45 @@
       </div><!-- /.container-fluid -->
     </section>
 
+    <!-- Search Filter-->
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Search Admin</h3>
+              </div>
+              <form action="" method="get">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="form-group col-md-2">
+                      <label for="emp_id">Employee ID</label>
+                      <input type="text" class="form-control" name="emp_id" id="emp_id" value="{{ Request::get('emp_id') }}" placeholder="Emp. ID">
+                    </div>
+                    <div class="form-group col-md-3">
+                      <label for="name">Name</label>
+                      <input type="text" class="form-control" name="name" id="name" value="{{ Request::get('name') }}" placeholder="Name">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label for="email">Email</label>
+                      <input type="text" class="form-control" name="email" id="email" value="{{ Request::get('email') }}" placeholder="E-mail">
+                    </div>
+                    <div class="form-group col-md-3">
+                      <button type="submit" class="btn btn-success" style="margin-top: 32px">Search</button>
+                      <a href="{{ url('admin/admin/list') }}" class="btn btn-warning" style="margin-top: 32px">Reset</a>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- /Search Filter-->
+
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
