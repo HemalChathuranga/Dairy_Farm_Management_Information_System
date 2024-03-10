@@ -6,34 +6,31 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class AdminController extends Controller
+class OfficeStaffController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data['fetchedRecord'] = User::getAdminRec();
-        $data['headerTitle'] = 'Admin List';
-        return view('admin.admin.list', $data);
+        $data['fetchedRecord'] = User::getOfficeStaffRec();
+        $data['headerTitle'] = 'Office Staff List';
+        return view('admin.officeStaff.list', $data);
         
     }
-    
 
     /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        $data['headerTitle'] = 'Add New Admin';
-        return view('admin.admin.add', $data);
+        $data['headerTitle'] = 'Add New Office Staff';
+        return view('admin.officeStaff.add', $data);
     }
-    
 
     /**
      * Store a newly created resource in storage.
      */
-    
     public function store(Request $request)
     {
 
@@ -81,16 +78,15 @@ class AdminController extends Controller
 
         $user->prof_pic = $fileName;
 
-        $user->role = 'Admin';
+        $user->role = 'Office Staff';
         $user->status = $request->status;
         $user->password = Hash::make($request->password);
 
         $user->save();
 
-        return redirect('admin/admin/list')->with('success', 'Admin User Created Succesfully');
+        return redirect('admin/officeStaff/list')->with('success', 'Office Staff User Created Succesfully');
 
     }
-    
 
     /**
      * Display the specified resource.
@@ -101,8 +97,8 @@ class AdminController extends Controller
 
         if (!empty($data['fetchedRecord'])) {
             
-            $data['headerTitle'] = 'Admin User Info.';
-            return view('admin.admin.view', $data);
+            $data['headerTitle'] = 'Office Staff User Info.';
+            return view('admin.officeStaff.view', $data);
 
         } else {
             
@@ -120,14 +116,14 @@ class AdminController extends Controller
 
         if (!empty($data['fetchedRecord'])) {
             
-            $data['headerTitle'] = 'Edit Admin User Info.';
-            return view('admin.admin.edit', $data);
+            $data['headerTitle'] = 'Edit Office Staff User Info.';
+            return view('admin.officeStaff.edit', $data);
 
         } else {
             
             abort(404);
         }
-    }    
+    }
 
     /**
      * Update the specified resource in storage.
@@ -186,9 +182,8 @@ class AdminController extends Controller
         
         $user->save();
 
-        return redirect('admin/admin/list')->with('success', 'Admin User Updated Succesfully');
+        return redirect('admin/officeStaff/list')->with('success', 'Office Staff User Updated Succesfully');
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -198,7 +193,6 @@ class AdminController extends Controller
         $user = User::getRecByID($id);
         $user->delete();
 
-        return redirect('admin/admin/list')->with('success', 'Admin User Deleted Succesfully');
+        return redirect('admin/officeStaff/list')->with('success', 'Office Staff User Deleted Succesfully');
     }
-    
 }
