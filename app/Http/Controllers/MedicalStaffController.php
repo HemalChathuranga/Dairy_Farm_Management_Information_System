@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class MedicalStaffController extends Controller
@@ -15,8 +16,14 @@ class MedicalStaffController extends Controller
     {
         $data['fetchedRecord'] = User::getMedicalStaffRec();
         $data['headerTitle'] = 'Medical Staff List';
-        return view('admin.medicalStaff.list', $data);
-        
+
+        if (Auth::user()->role == 'Admin'){
+            return view('admin.medicalStaff.list', $data);
+        }
+        elseif (Auth::user()->role == 'Manager'){
+            return view('manager.medicalStaff.list', $data);
+        }
+         
     }
 
     /**
@@ -25,7 +32,14 @@ class MedicalStaffController extends Controller
     public function create()
     {
         $data['headerTitle'] = 'Add New Medical Staff';
-        return view('admin.medicalStaff.add', $data);
+
+        if (Auth::user()->role == 'Admin'){
+            return view('admin.medicalStaff.add', $data);
+        }
+        elseif (Auth::user()->role == 'Manager'){
+            return view('manager.medicalStaff.add', $data);
+        }
+        
     }
 
     /**
@@ -84,7 +98,14 @@ class MedicalStaffController extends Controller
 
         $user->save();
 
-        return redirect('admin/medicalStaff/list')->with('success', 'Medical Staff User Created Succesfully');
+        if (Auth::user()->role == 'Admin'){
+            return redirect('admin/medicalStaff/list')->with('success', 'Medical Staff User Created Succesfully');
+        }
+        elseif (Auth::user()->role == 'Manager'){
+            return redirect('manager/medicalStaff/list')->with('success', 'Medical Staff User Created Succesfully');
+        }
+
+        
 
     }
 
@@ -98,8 +119,14 @@ class MedicalStaffController extends Controller
         if (!empty($data['fetchedRecord'])) {
             
             $data['headerTitle'] = 'Medical Staff User Info.';
-            return view('admin.medicalStaff.view', $data);
 
+            if (Auth::user()->role == 'Admin'){
+                return view('admin.medicalStaff.view', $data);
+            }
+            elseif (Auth::user()->role == 'Manager'){
+                return view('manager.medicalStaff.view', $data);
+            }
+            
         } else {
             
             abort(404);
@@ -117,7 +144,14 @@ class MedicalStaffController extends Controller
         if (!empty($data['fetchedRecord'])) {
             
             $data['headerTitle'] = 'Edit Medical Staff User Info.';
-            return view('admin.medicalStaff.edit', $data);
+
+            if (Auth::user()->role == 'Admin'){
+                return view('admin.medicalStaff.edit', $data);
+            }
+            elseif (Auth::user()->role == 'Manager'){
+                return view('manager.medicalStaff.edit', $data);
+            }
+            
 
         } else {
             
@@ -182,7 +216,14 @@ class MedicalStaffController extends Controller
         
         $user->save();
 
-        return redirect('admin/medicalStaff/list')->with('success', 'Medical Staff User Updated Succesfully');
+        if (Auth::user()->role == 'Admin'){
+            return redirect('admin/medicalStaff/list')->with('success', 'Medical Staff User Updated Succesfully');
+        }
+        elseif (Auth::user()->role == 'Manager'){
+            return redirect('manager/medicalStaff/list')->with('success', 'Medical Staff User Updated Succesfully');
+        }
+
+        
     }
 
     /**
@@ -193,6 +234,13 @@ class MedicalStaffController extends Controller
         $user = User::getRecByID($id);
         $user->delete();
 
-        return redirect('admin/medicalStaff/list')->with('success', 'Medical Staff User Deleted Succesfully');
+        if (Auth::user()->role == 'Admin'){
+            return redirect('admin/medicalStaff/list')->with('success', 'Medical Staff User Deleted Succesfully');
+        }
+        elseif (Auth::user()->role == 'Manager'){
+            return redirect('manager/medicalStaff/list')->with('success', 'Medical Staff User Deleted Succesfully');
+        }
+
+        
     }
 }

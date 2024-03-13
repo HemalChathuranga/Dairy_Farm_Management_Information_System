@@ -95,7 +95,7 @@
                         <td>{{ $item->first_name . ' ' . $item->last_name }}</td>
                         <td>{{ $item->email }}</td>
                         <td>{{ $item->mobile_number }}</td>
-                        <td>{{ $item->status }}</td>
+                        <td><span class="{{($item->status == "Active") ? "badge badge-success" : "badge badge-danger"}}">{{ $item->status }}</span></td>
                         <td>
                           <a href="{{ url('admin/fieldStaff/'.$item->id.'/view') }}" type="button" class="btn btn-outline-info">View</a>
                           <a href="{{ url('admin/fieldStaff/'.$item->id.'/edit') }}" type="button" class="btn btn-outline-warning">Edit</a>

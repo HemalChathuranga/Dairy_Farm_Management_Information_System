@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class StoresStaffController extends Controller
@@ -15,7 +16,14 @@ class StoresStaffController extends Controller
     {
         $data['fetchedRecord'] = User::getStoresStaffRec();
         $data['headerTitle'] = 'Stores Staff List';
-        return view('admin.storesStaff.list', $data);
+
+        if (Auth::user()->role == 'Admin'){
+            return view('admin.storesStaff.list', $data);
+        }
+        elseif (Auth::user()->role == 'Manager'){
+            return view('manager.storesStaff.list', $data);
+        }
+        
         
     }
 
@@ -25,7 +33,14 @@ class StoresStaffController extends Controller
     public function create()
     {
         $data['headerTitle'] = 'Add New Stores Staff';
-        return view('admin.storesStaff.add', $data);
+
+        if (Auth::user()->role == 'Admin'){
+            return view('admin.storesStaff.add', $data);
+        }
+        elseif (Auth::user()->role == 'Manager'){
+            return view('manager.storesStaff.add', $data);
+        }
+        
     }
 
     /**
@@ -84,7 +99,14 @@ class StoresStaffController extends Controller
 
         $user->save();
 
-        return redirect('admin/storesStaff/list')->with('success', 'Stores Staff User Created Succesfully');
+        if (Auth::user()->role == 'Admin'){
+            return redirect('admin/storesStaff/list')->with('success', 'Stores Staff User Created Succesfully');
+        }
+        elseif (Auth::user()->role == 'Manager'){
+            return redirect('manager/storesStaff/list')->with('success', 'Stores Staff User Created Succesfully');
+        }
+
+        
 
     }
 
@@ -98,7 +120,14 @@ class StoresStaffController extends Controller
         if (!empty($data['fetchedRecord'])) {
             
             $data['headerTitle'] = 'Stores Staff User Info.';
-            return view('admin.storesStaff.view', $data);
+
+            if (Auth::user()->role == 'Admin'){
+                return view('admin.storesStaff.view', $data);
+            }
+            elseif (Auth::user()->role == 'Manager'){
+                return view('manager.storesStaff.view', $data);
+            }
+            
 
         } else {
             
@@ -117,7 +146,14 @@ class StoresStaffController extends Controller
         if (!empty($data['fetchedRecord'])) {
             
             $data['headerTitle'] = 'Edit Stores Staff User Info.';
-            return view('admin.storesStaff.edit', $data);
+
+            if (Auth::user()->role == 'Admin'){
+                return view('admin.storesStaff.edit', $data);
+            }
+            elseif (Auth::user()->role == 'Manager'){
+                return view('manager.storesStaff.edit', $data);
+            }
+            
 
         } else {
             
@@ -182,7 +218,14 @@ class StoresStaffController extends Controller
         
         $user->save();
 
-        return redirect('admin/storesStaff/list')->with('success', 'Stores Staff User Updated Succesfully');
+        if (Auth::user()->role == 'Admin'){
+            return redirect('admin/storesStaff/list')->with('success', 'Stores Staff User Updated Succesfully');
+        }
+        elseif (Auth::user()->role == 'Manager'){
+            return redirect('manager/storesStaff/list')->with('success', 'Stores Staff User Updated Succesfully');
+        }
+
+        
     }
 
     /**
@@ -193,6 +236,13 @@ class StoresStaffController extends Controller
         $user = User::getRecByID($id);
         $user->delete();
 
-        return redirect('admin/storesStaff/list')->with('success', 'Stores Staff User Deleted Succesfully');
+        if (Auth::user()->role == 'Admin'){
+            return redirect('admin/storesStaff/list')->with('success', 'Stores Staff User Deleted Succesfully');
+        }
+        elseif (Auth::user()->role == 'Manager'){
+            return redirect('manager/storesStaff/list')->with('success', 'Stores Staff User Deleted Succesfully');
+        }
+
+        
     }
 }

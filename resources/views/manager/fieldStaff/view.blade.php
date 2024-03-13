@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Profile Info.</h1>
+            <h1>Field Staff User Info.</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -23,12 +23,13 @@
                     <div class="card-tools">
                       <div class="input-group input-group-sm" style="width: 150px;">
                         <div>
-                          <a href="{{ url('change_password') }}" class="btn btn-primary float-end">Change Password</a>
+                          <a href="{{ url('manager/fieldStaff/list') }}" class="btn btn-primary float-end"><i class="fas fa-backward"></i> Back</a>
                         </div>
                       </div>
                     </div>
                   </div>
               <form>
+                @csrf
                 <div class="card-body">
                   <div class="row">
                     <div class="form-group col-md-8">
@@ -54,11 +55,6 @@
                         <div class="card-body">
                           <div class="image">
                             <img src="{{ '\uploads\profile_img\\' . $fetchedRecord->prof_pic }}" class="img-fluid d-block mx-auto" style="width:50%; hight:60%; align:center" alt="User Image">
-                              <div class="row mt-1">
-                                <div class="col d-flex justify-content-center">
-                                  <a href="{{ url('change_prof_pic') }}" class="btn btn-outline-secondary btn-sm">Change <i class="fas fa-camera-retro"></i></a>
-                                </div>  
-                              </div>
                           </div>
                         </div>
                       </div>

@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Office Staff List</h1>
+            <h1>Stores Staff List</h1>
           </div>
           <div class="col-sm-6">
             @include('message')
@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-group col-md-3">
                       <button type="submit" class="btn btn-success" style="margin-top: 32px">Search</button>
-                      <a href="{{ url('admin/officeStaff/list') }}" class="btn btn-warning" style="margin-top: 32px">Reset</a>
+                      <a href="{{ url('manager/storesStaff/list') }}" class="btn btn-warning" style="margin-top: 32px">Reset</a>
                     </div>
                   </div>
                 </div>
@@ -66,7 +66,7 @@
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <div>
-                      <a href="{{ url('admin/officeStaff/add') }}" class="btn btn-primary float-end"><i class="fas fa-plus"></i> Add Staff</a>
+                      <a href="{{ url('manager/storesStaff/add') }}" class="btn btn-primary float-end"><i class="fas fa-plus"></i> Add Staff</a>
                     </div>
                   </div>
                 </div>
@@ -97,9 +97,10 @@
                         <td>{{ $item->mobile_number }}</td>
                         <td><span class="{{($item->status == "Active") ? "badge badge-success" : "badge badge-danger"}}">{{ $item->status }}</span></td>
                         <td>
-                          <a href="{{ url('admin/officeStaff/'.$item->id.'/view') }}" type="button" class="btn btn-outline-info">View</a>
-                          <a href="{{ url('admin/officeStaff/'.$item->id.'/edit') }}" type="button" class="btn btn-outline-warning">Edit</a>
-                          <a href="{{ url('admin/officeStaff/'.$item->id.'/delete') }}" type="button" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this Record?')">Delete</a>
+                          <a href="{{ url('manager/storesStaff/'.$item->id.'/view') }}" type="button" class="btn btn-outline-info">View</a>
+                          <a href="{{ url('manager/storesStaff/'.$item->id.'/edit') }}" type="button" class="btn btn-outline-warning">Edit</a>
+                          {{-- User Delete Functionality removed from the Manager role and only kept at the Admin level --}}
+                          {{-- <a href="{{ url('manager/storesStaff/'.$item->id.'/delete') }}" type="button" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this Record?')">Delete</a> --}}
                         </td>
                       </tr>
                   @endforeach

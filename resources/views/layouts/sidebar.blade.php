@@ -16,7 +16,7 @@
           <img src="{{ '\uploads\profile_img\\' . Auth::user()->prof_pic }}" style="width:30px; hight:30px;" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</a>
+          <a href="{{ url('profile') }}" class="d-block">{{ Auth::user()->first_name . ' ' . Auth::user()->last_name }}</a>
         </div>
       </div>
 
@@ -83,7 +83,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url('admin/profile') }}" class="nav-link @if(Request::segment(2) == 'profile') ? active @endif">
+                <a href="{{ url('profile') }}" class="nav-link @if(Request::segment(1) == 'profile') ? active @endif">
                   <i class="nav-icon fas fa-address-card"></i>
                   <p>
                     Profile
@@ -110,7 +110,39 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url('manager/profile') }}" class="nav-link @if(Request::segment(2) == 'profile') ? active @endif">
+                <a href="{{ url('manager/officeStaff/list') }}" class="nav-link @if(Request::segment(2) == 'officeStaff') ? active @endif">
+                  <i class="nav-icon fas fa-user-tie"></i>
+                  <p>
+                    Office Staff
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('manager/medicalStaff/list') }}" class="nav-link @if(Request::segment(2) == 'medicalStaff') ? active @endif">
+                  <i class="nav-icon fas fa-user-nurse"></i>
+                  <p>
+                    Medical Staff
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('manager/fieldStaff/list') }}" class="nav-link @if(Request::segment(2) == 'fieldStaff') ? active @endif">
+                  <i class="nav-icon fas fa-user-tie"></i>
+                  <p>
+                    Field Staff
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('manager/storesStaff/list') }}" class="nav-link @if(Request::segment(2) == 'storesStaff') ? active @endif">
+                  <i class="nav-icon fas fa-user-tie"></i>
+                  <p>
+                    Stores Staff
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ url('profile') }}" class="nav-link @if(Request::segment(1) == 'profile') ? active @endif">
                   <i class="nav-icon fas fa-address-card"></i>
                   <p>
                     Profile
@@ -137,7 +169,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url('officeStaff/profile') }}" class="nav-link @if(Request::segment(2) == 'profile') ? active @endif">
+                <a href="{{ url('profile') }}" class="nav-link @if(Request::segment(1) == 'profile') ? active @endif">
                   <i class="nav-icon fas fa-address-card"></i>
                   <p>
                     Profile
@@ -164,7 +196,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url('medicalStaff/profile') }}" class="nav-link @if(Request::segment(2) == 'profile') ? active @endif">
+                <a href="{{ url('profile') }}" class="nav-link @if(Request::segment(1) == 'profile') ? active @endif">
                   <i class="nav-icon fas fa-address-card"></i>
                   <p>
                     Profile
@@ -191,7 +223,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url('fieldStaff/profile') }}" class="nav-link @if(Request::segment(2) == 'profile') ? active @endif">
+                <a href="{{ url('profile') }}" class="nav-link @if(Request::segment(1) == 'profile') ? active @endif">
                   <i class="nav-icon fas fa-address-card"></i>
                   <p>
                     Profile
@@ -218,7 +250,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="{{ url('storesStaff/profile') }}" class="nav-link @if(Request::segment(2) == 'profile') ? active @endif">
+                <a href="{{ url('profile') }}" class="nav-link @if(Request::segment(1) == 'profile') ? active @endif">
                   <i class="nav-icon fas fa-address-card"></i>
                   <p>
                     Profile

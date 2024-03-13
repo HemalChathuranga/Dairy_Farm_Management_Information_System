@@ -16,7 +16,7 @@ class UserController extends Controller
 
         if (!empty($data['fetchedRecord'])) {
             
-            $data['headerTitle'] = 'Admin Profile';
+            $data['headerTitle'] = 'Profile';
             return view('profile.profile', $data);
 
         } else {

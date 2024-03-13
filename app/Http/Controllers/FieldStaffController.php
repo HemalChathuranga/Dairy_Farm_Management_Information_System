@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class FieldStaffController extends Controller
@@ -15,7 +16,14 @@ class FieldStaffController extends Controller
     {
         $data['fetchedRecord'] = User::getFieldStaffRec();
         $data['headerTitle'] = 'Field Staff List';
-        return view('admin.fieldStaff.list', $data);
+
+        if (Auth::user()->role == 'Admin'){
+            return view('admin.fieldStaff.list', $data);
+        }
+        elseif (Auth::user()->role == 'Manager'){
+            return view('manager.fieldStaff.list', $data);
+        }
+        
         
     }
 
@@ -25,7 +33,14 @@ class FieldStaffController extends Controller
     public function create()
     {
         $data['headerTitle'] = 'Add New Field Staff';
-        return view('admin.fieldStaff.add', $data);
+
+        if (Auth::user()->role == 'Admin'){
+            return view('admin.fieldStaff.add', $data);
+        }
+        elseif (Auth::user()->role == 'Manager'){
+            return view('manager.fieldStaff.add', $data);
+        }
+        
     }
 
     /**
@@ -84,7 +99,13 @@ class FieldStaffController extends Controller
 
         $user->save();
 
-        return redirect('admin/fieldStaff/list')->with('success', 'Field Staff User Created Succesfully');
+        if (Auth::user()->role == 'Admin'){
+            return redirect('admin/fieldStaff/list')->with('success', 'Field Staff User Created Succesfully');
+        }
+        elseif (Auth::user()->role == 'Manager'){
+            return redirect('manager/fieldStaff/list')->with('success', 'Field Staff User Created Succesfully');
+        }
+        
 
     }
 
@@ -98,7 +119,14 @@ class FieldStaffController extends Controller
         if (!empty($data['fetchedRecord'])) {
             
             $data['headerTitle'] = 'Field Staff User Info.';
-            return view('admin.fieldStaff.view', $data);
+
+            if (Auth::user()->role == 'Admin'){
+                return view('admin.fieldStaff.view', $data);
+            }
+            elseif (Auth::user()->role == 'Manager'){
+                return view('manager.fieldStaff.view', $data);
+            }
+            
 
         } else {
             
@@ -117,7 +145,14 @@ class FieldStaffController extends Controller
         if (!empty($data['fetchedRecord'])) {
             
             $data['headerTitle'] = 'Edit Field Staff User Info.';
-            return view('admin.fieldStaff.edit', $data);
+
+            if (Auth::user()->role == 'Admin'){
+                return view('admin.fieldStaff.edit', $data);
+            }
+            elseif (Auth::user()->role == 'Manager'){
+                return view('manager.fieldStaff.edit', $data);
+            }
+            
 
         } else {
             
@@ -182,7 +217,14 @@ class FieldStaffController extends Controller
         
         $user->save();
 
-        return redirect('admin/fieldStaff/list')->with('success', 'Field Staff User Updated Succesfully');
+        if (Auth::user()->role == 'Admin'){
+            return redirect('admin/fieldStaff/list')->with('success', 'Field Staff User Updated Succesfully');
+        }
+        elseif (Auth::user()->role == 'Manager'){
+            return redirect('manager/fieldStaff/list')->with('success', 'Field Staff User Updated Succesfully');
+        }
+
+        
     }
 
     /**
@@ -193,6 +235,13 @@ class FieldStaffController extends Controller
         $user = User::getRecByID($id);
         $user->delete();
 
-        return redirect('admin/fieldStaff/list')->with('success', 'Field Staff User Deleted Succesfully');
+        if (Auth::user()->role == 'Admin'){
+            return redirect('admin/fieldStaff/list')->with('success', 'Field Staff User Deleted Succesfully');
+        }
+        elseif (Auth::user()->role == 'Manager'){
+            return redirect('manager/fieldStaff/list')->with('success', 'Field Staff User Deleted Succesfully');
+        }
+
+        
     }
 }
