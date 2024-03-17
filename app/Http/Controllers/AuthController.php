@@ -47,7 +47,7 @@ class AuthController extends Controller
 
         if(Auth::attempt(['emp_id' => $request->uid, 'password' => $request->password], $remember)){
 
-            if(Auth::user()->role == 'Admin'){
+            if(Auth::user()->role == 'Admin' && Auth::user()->status == "Active"){
 
                 return redirect('admin/dashboard');
             }
@@ -70,6 +70,10 @@ class AuthController extends Controller
             elseif(Auth::user()->role == 'Stores Staff'){
 
                 return redirect('storesStaff/dashboard');
+            }
+            else {
+                Auth::logout();
+                return redirect()->back()->with('error', 'Your User Credentials has been Revoked');
             }
         }
         else{

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FieldStaffController;
@@ -27,7 +28,7 @@ use App\Http\Controllers\MedicalStaffController;
 // });
 
 Route::get('/1', function () {
-    return view('message');
+    return view('admin.animal.edit');
 });
 
 
@@ -97,6 +98,16 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('admin/storesStaff/{id}/edit', [StoresStaffController::class, 'edit']);
     Route::post('admin/storesStaff/{id}/edit', [StoresStaffController::class, 'update']);
     Route::get('admin/storesStaff/{id}/delete', [StoresStaffController::class, 'destroy']);
+
+
+    //Animals CRUD in Admin
+    Route::get('admin/animal/list', [AnimalController::class, 'index']);
+    Route::get('admin/animal/add', [AnimalController::class, 'create']);
+    Route::post('admin/animal/add', [AnimalController::class, 'store']);
+    Route::get('admin/animal/{id}/view', [AnimalController::class, 'show']);
+    Route::get('admin/animal/{id}/edit', [AnimalController::class, 'edit']);
+    Route::post('admin/animal/{id}/edit', [AnimalController::class, 'update']);
+    Route::get('admin/animal/{id}/delete', [AnimalController::class, 'destroy']);
 
 
 

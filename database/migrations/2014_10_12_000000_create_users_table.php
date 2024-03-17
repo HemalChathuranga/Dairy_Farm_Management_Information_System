@@ -21,7 +21,7 @@ return new class extends Migration
             $table->date('joined_date');
             $table->string('nic');
             $table->string('mobile_number');
-            $table->text('address');
+            $table->text('address')->nullable();
             $table->string('email')->unique();
             $table->string('prof_pic')->nullable();
             $table->enum('role', ['Admin','Manager','Office Staff','Medical Staff', 'Field Staff', 'Stores Staff', 'User'])->default('User');

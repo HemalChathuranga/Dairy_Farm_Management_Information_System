@@ -1,19 +1,19 @@
 
 @if (!empty(session('success')))
 <div class="alert alert-success alert-dismissible fade show" role="alert">
-    <a href=""><strong>X</strong></a><strong>  Success!</strong> {{ session('success') }}
+    <a href="" class="btn btn-outline-light btn-sm"><strong>X</strong></a><strong>  Success!</strong> {{ session('success') }}
   </div>
 @endif
 
 @if (!empty(session('error')))
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <a href=""><strong>X</strong></a><strong>  Error!</strong> {{ session('error') }}
+  <a href="" class="btn btn-outline-light btn-sm"><strong></strong>X</a><strong>  Error!</strong> {{ session('error') }}
   </div>
 @endif
 
 @if (!empty(session('info')))
   <div class="alert alert-info alert-dismissible fade show" role="alert">
-    <a href=""><strong>X</strong></a><strong>  Info!</strong> {{ session('info') }}
+    <a href="" class="btn btn-outline-light btn-sm"><strong>X</strong></a><strong>  Info!</strong> {{ session('info') }}
   </div>
 @endif
 {{-- 

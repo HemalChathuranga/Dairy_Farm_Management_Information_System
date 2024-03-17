@@ -97,10 +97,10 @@
                         <td>{{ $item->mobile_number }}</td>
                         <td><span class="{{($item->status == "Active") ? "badge badge-success" : "badge badge-danger"}}">{{ $item->status }}</span></td>
                         <td>
-                          <a href="{{ url('manager/storesStaff/'.$item->id.'/view') }}" type="button" class="btn btn-outline-info">View</a>
-                          <a href="{{ url('manager/storesStaff/'.$item->id.'/edit') }}" type="button" class="btn btn-outline-warning">Edit</a>
+                          <a href="{{ url('manager/storesStaff/'.$item->id.'/view') }}" type="button" class="btn btn-outline-info btn-sm"><i class="fas fa-eye"></i></a>
+                          <a href="{{ url('manager/storesStaff/'.$item->id.'/edit') }}" type="button" class="btn btn-outline-warning btn-sm"><i class="fas fa-pen"></i></a>
                           {{-- User Delete Functionality removed from the Manager role and only kept at the Admin level --}}
-                          {{-- <a href="{{ url('manager/storesStaff/'.$item->id.'/delete') }}" type="button" class="btn btn-outline-danger" onclick="return confirm('Are you sure you want to delete this Record?')">Delete</a> --}}
+                          {{-- <a href="{{ url('manager/storesStaff/'.$item->id.'/delete') }}" type="button" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Record?')">Delete</a> --}}
                         </td>
                       </tr>
                   @endforeach
