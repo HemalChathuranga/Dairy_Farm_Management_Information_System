@@ -67,7 +67,7 @@
                         <option {{ (old('breed') == 'Brahman') ? 'selected' : '' }} value="Brahman">Brahman</option>
                         <option {{ (old('breed') == 'Mundi') ? 'selected' : '' }} value="Mundi">Mundi</option>
                         <option {{ (old('breed') == 'Jersey') ? 'selected' : '' }} value="Jersey">Jersey</option>
-                        <option {{ (old('breed') == 'Holstein Friesian') ? 'selected' : '' }} value="Holstein Friesian">Holstein Friesian</option>
+                        <option {{ (old('breed') == 'Holstein Friesian') ? 'selected' : '' }} value="Holstein-Friesian">Holstein-Friesian</option>
                         <option {{ (old('breed') == 'Sindi') ? 'selected' : '' }} value="Sindi">Sindi</option>
                         <option {{ (old('breed') == 'Sahiwal') ? 'selected' : '' }} value="Sahiwal">Sahiwal</option>
                       </select>

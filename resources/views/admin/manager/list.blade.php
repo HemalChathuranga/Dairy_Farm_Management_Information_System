@@ -66,7 +66,9 @@
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <div>
-                      <a href="{{ url('admin/manager/add') }}" class="btn btn-primary float-end"><i class="fas fa-plus"></i> Add Manager</a>
+                      <div class="row">
+                        <a href="{{ url('admin/manager/add') }}" class="btn btn-primary float-end"><i class="fas fa-plus"></i> Add New Manager</a>
+                      </div>
                     </div>
                   </div>
                 </div>

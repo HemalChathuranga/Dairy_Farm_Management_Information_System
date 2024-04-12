@@ -99,6 +99,7 @@ Route::group(['middleware' => 'admin'], function(){
     Route::post('admin/storesStaff/{id}/edit', [StoresStaffController::class, 'update']);
     Route::get('admin/storesStaff/{id}/delete', [StoresStaffController::class, 'destroy']);
 
+    
 
     //Animals CRUD in Admin
     Route::get('admin/animal/list', [AnimalController::class, 'index']);

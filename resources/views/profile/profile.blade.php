@@ -53,7 +53,7 @@
                       <div class="card">
                         <div class="card-body">
                           <div class="image">
-                            <img src="{{ '\uploads\profile_img\\' . $fetchedRecord->prof_pic }}" class="img-fluid d-block mx-auto" style="width:50%; hight:60%; align:center" alt="User Image">
+                            <img src="{{ '\uploads\profile_img\\' . $fetchedRecord->prof_pic }}" class="img-fluid d-block mx-auto" style="width:40%; hight:10%; align:center" alt="User Image">
                               <div class="row mt-1">
                                 <div class="col d-flex justify-content-center">
                                   <a href="{{ url('change_prof_pic') }}" class="btn btn-outline-secondary btn-sm">Change <i class="fas fa-camera-retro"></i></a>

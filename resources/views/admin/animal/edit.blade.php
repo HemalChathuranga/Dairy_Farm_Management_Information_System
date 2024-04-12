@@ -13,6 +13,19 @@
       </div><!-- /.container-fluid -->
     </section>
 
+    <div class="row">
+      @if ($errors->any())
+        <div>
+          <ul class="alert alert-danger">
+              @foreach ($errors->all() as $item)
+                  <li>{{ $item }}</li>
+              @endforeach
+          </ul>
+        </div>
+          
+      @endif
+    </div>
+
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
@@ -28,7 +41,7 @@
                       </div>
                     </div>
                   </div>
-                  <form action="" method="post" enctype="multipart/form-data">
+                  <form action="" method="post">
                     @csrf
                     <div class="card-body">
                       <div class="row">
@@ -37,26 +50,34 @@
                       <div class="row mt-3">
                         <div class="form-group col-md-3">
                           <label for="animal_id">Animal ID<span style="color: red">*</span></label>
-                          <input type="text" class="form-control" name="animal_id" id="animal_id" value="{{ old('emp_id') }}">
+                          <input type="text" class="form-control" name="animal_id" id="animal_id" value="{{ old('animal_id', $fetchedRecord->animal_id) }}" readonly>
                           <div style="color: rgb(196, 3, 3)">{{ $errors->first('animal_id') }}</div>
                         </div>
                         <div class="form-group col-md-3">
+                          <label for="status">Status <span style="color: red">*</span></label>
+                          <select class="form-control" name="status" id="status" value="{{ old('status', $fetchedRecord->status) }}">
+                            <option {{(old('status', $fetchedRecord->status) === 'Active') ? 'selected' : '' }} value="Active">Active</option>
+                            <option {{(old('status', $fetchedRecord->status) === 'Inactive') ? 'selected' : '' }} value="Inactive">Inactive</option>
+                          </select>
+                          <div style="color: rgb(196, 3, 3)">{{ $errors->first('gender') }}</div>
+                        </div>
+                        <div class="form-group col-md-3">
                           <label for="birth_date">Date of Birth <span style="color: red">*</span></label>
-                          <input type="date" class="form-control" name="birth_date" id="birth_date" value="{{ old('birth_date') }}">
+                          <input type="date" class="form-control" name="birth_date" id="birth_date" value="{{ old('birth_date', $fetchedRecord->birth_date) }}">
                           <div style="color: rgb(196, 3, 3)">{{ $errors->first('birth_date') }}</div>
                         </div>
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-md-3">
                           <label for="breed">Breed <span style="color: red">*</span></label>
                           <select class="form-control" name="breed" id="breed">
                             <option value="">Select Breed</option>
-                            <option {{ (old('breed') == 'Holstein') ? 'selected' : '' }} value="Holstein">Holstein</option>
-                            <option {{ (old('breed') == 'Friesian') ? 'selected' : '' }} value="Friesian">Friesian</option>
-                            <option {{ (old('breed') == 'Brahman') ? 'selected' : '' }} value="Brahman">Brahman</option>
-                            <option {{ (old('breed') == 'Mundi') ? 'selected' : '' }} value="Mundi">Mundi</option>
-                            <option {{ (old('breed') == 'Jersey') ? 'selected' : '' }} value="Jersey">Jersey</option>
-                            <option {{ (old('breed') == 'Holstein Friesian') ? 'selected' : '' }} value="Holstein Friesian">Holstein Friesian</option>
-                            <option {{ (old('breed') == 'Sindi') ? 'selected' : '' }} value="Sindi">Sindi</option>
-                            <option {{ (old('breed') == 'Sahiwal') ? 'selected' : '' }} value="Sahiwal">Sahiwal</option>
+                            <option {{ (old('breed', $fetchedRecord->breed) == 'Holstein') ? 'selected' : '' }} value="Holstein">Holstein</option>
+                            <option {{ (old('breed', $fetchedRecord->breed) == 'Friesian') ? 'selected' : '' }} value="Friesian">Friesian</option>
+                            <option {{ (old('breed', $fetchedRecord->breed) == 'Brahman') ? 'selected' : '' }} value="Brahman">Brahman</option>
+                            <option {{ (old('breed', $fetchedRecord->breed) == 'Mundi') ? 'selected' : '' }} value="Mundi">Mundi</option>
+                            <option {{ (old('breed', $fetchedRecord->breed) == 'Jersey') ? 'selected' : '' }} value="Jersey">Jersey</option>
+                            <option {{ (old('breed', $fetchedRecord->breed) == 'Holstein Friesian') ? 'selected' : '' }} value="Holstein Friesian">Holstein Friesian</option>
+                            <option {{ (old('breed', $fetchedRecord->breed) == 'Sindi') ? 'selected' : '' }} value="Sindi">Sindi</option>
+                            <option {{ (old('breed', $fetchedRecord->breed) == 'Sahiwal') ? 'selected' : '' }} value="Sahiwal">Sahiwal</option>
                           </select>
                           <div style="color: rgb(196, 3, 3)">{{ $errors->first('breed') }}</div>
                         </div>
@@ -66,45 +87,45 @@
                           <label for="gender">Gender <span style="color: red">*</span></label>
                           <select class="form-control" name="gender" id="gender">
                             <option value="">Select Gender</option>
-                            <option {{ (old('gender') == 'Male') ? 'selected' : '' }} value="Male">Male</option>
-                            <option {{ (old('gender') == 'Female') ? 'selected' : '' }} value="Female">Female</option>
+                            <option {{ (old('gender', $fetchedRecord->gender) == 'Male') ? 'selected' : '' }} value="Male">Male</option>
+                            <option {{ (old('gender', $fetchedRecord->gender) == 'Female') ? 'selected' : '' }} value="Female">Female</option>
                           </select>
                           <div style="color: rgb(196, 3, 3)">{{ $errors->first('gender') }}</div>
                         </div>
                         <div class="form-group col-md-6">
                           <label for="stall_number">Stall Number  <span style="color: red">*</span></label>
-                          <input type="text" class="form-control" name="stall_number" id="stall_number" value="{{ old('stall_number') }}" placeholder="Enter Stall Number">
+                          <input type="text" class="form-control" name="stall_number" id="stall_number" value="{{ old('stall_number', $fetchedRecord->stall_number) }}" placeholder="Enter Stall Number">
                           <div style="color: rgb(196, 3, 3)">{{ $errors->first('stall_number') }}</div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="form-group col-md-6">
                           <label for="weight_at_birth">Weight at Birth (KG)</label>
-                          <input type="number" class="form-control" name="weight_at_birth" id="weight_at_birth" value="{{ old('weight_at_birth') }}" placeholder="Weight at Birth (KG)">
+                          <input type="number" class="form-control" name="weight_at_birth" id="weight_at_birth" value="{{ old('weight_at_birth', $fetchedRecord->weight_at_birth) }}" placeholder="Weight at Birth (KG)">
                           <div style="color: rgb(196, 3, 3)">{{ $errors->first('weight_at_birth') }}</div>
                         </div>
                         <div class="form-group col-md-6">
                           <label for="height_at_birth">Height at Birth (Inch)</label>
-                          <input type="number" class="form-control" name="height_at_birth" id="height_at_birth" value="{{ old('height_at_birth') }}" placeholder="Height at Birth (Inch)">
+                          <input type="number" class="form-control" name="height_at_birth" id="height_at_birth" value="{{ old('height_at_birth', $fetchedRecord->height_at_birth) }}" placeholder="Height at Birth (Inch)">
                           <div style="color: rgb(196, 3, 3)">{{ $errors->first('height_at_birth') }}</div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="form-group col-md-6">
                           <label for="buy_date">Buy Date</label>
-                          <input type="date" class="form-control" name="buy_date" id="buy_date" value="{{ old('buy_date') }}">
+                          <input type="date" class="form-control" name="buy_date" id="buy_date" value="{{ old('buy_date', $fetchedRecord->buy_date) }}">
                           <div style="color: rgb(196, 3, 3)">{{ $errors->first('buy_date') }}</div>
                         </div>
                         <div class="form-group col-md-6">
                           <label for="buy_price">Buy Price</label>
-                          <input type="number" class="form-control" name="buy_price" id="buy_price" value="{{ old('buy_price') }}" placeholder="Buy Price">
+                          <input type="number" class="form-control" name="buy_price" id="buy_price" value="{{ old('buy_price', $fetchedRecord->buy_price) }}" placeholder="Buy Price">
                           <div style="color: rgb(196, 3, 3)">{{ $errors->first('buy_price') }}</div>
                         </div>
                       </div>
                       <div class="row">
                         <div class="form-group col-md-12">
                           <label for="notes">Notes</label>
-                          <textarea class="form-control" name="notes" id="notes" rows="4" value="{{ old('notes') }}" placeholder="Enter Notes"></textarea>
+                          <textarea class="form-control" name="notes" id="notes" rows="4" value="{{ old('notes', $fetchedRecord->notes) }}" placeholder="Enter Notes"></textarea>
                         </div>
                       </div>
     
@@ -115,43 +136,48 @@
                       <div class="row mt-3">
                         <div class="form-group col-md-6">
                           <label for="father_id">Father ID</label>
-                          <input type="text" class="form-control" name="father_id" id="father_id" value="{{ old('father_id') }}" placeholder="Enter Father ID">
+                          <input type="text" class="form-control" name="father_id" id="father_id" value="{{ old('father_id', $fetchedRecord->father_id) }}" placeholder="Enter Father ID">
                           <div style="color: rgb(196, 3, 3)">{{ $errors->first('father_id') }}</div>
                         </div>
                         <div class="form-group col-md-6">
                           <label for="mother_id">Mother ID</label>
-                          <input type="text" class="form-control" name="mother_id" id="mother_id" value="{{ old('mother_id') }}" placeholder="Enter Mother ID">
+                          <input type="text" class="form-control" name="mother_id" id="mother_id" value="{{ old('mother_id', $fetchedRecord->mother_id) }}" placeholder="Enter Mother ID">
                           <div style="color: rgb(196, 3, 3)">{{ $errors->first('mother_id') }}</div>
                         </div>
                       </div>
 
 
                       <div class="row mt-3">
-                        <h5><u>Animal Medical Information</u></h5>
+                        <h5><u>Current Medical Information</u></h5>
                       </div>
-    
-                      <div class="row mt-3">
-                        <div class="form-group col-md-6">
-                          <label for="pregnant_status">Pregnant Status</label>
-                          <input type="text" class="form-control" name="pregnant_status" id="pregnant_status" value="{{ old('pregnant_status') }}" placeholder="Enter Father ID">
-                          <div style="color: rgb(196, 3, 3)">{{ $errors->first('pregnant_status') }}</div>
+                      
+                      @if ($fetchedRecord->gender == "Female")
+                        <div class="row mt-3">
+                          <div class="form-group col-md-4">
+                            <label for="pregnant_status">Pregnant Status</label>
+                            <select class="form-control" name="pregnant_status" id="pregnant_status">
+                              <option {{ (old('pregnant_status', $fetchedRecord->pregnant_status) == 'No') ? 'selected' : '' }} value="No">Not Pregnant</option>
+                              <option {{ (old('pregnant_status', $fetchedRecord->pregnant_status) == 'Yes') ? 'selected' : '' }} value="Yes">Pregnant</option>
+                            </select>
+                            <div style="color: rgb(196, 3, 3)">{{ $errors->first('pregnant_status') }}</div>
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="pregnancy_occ">Pregnancy Occ.</label>
+                            <input type="text" class="form-control" name="pregnancy_occ" id="pregnancy_occ" value="{{ old('pregnancy_occ', $fetchedRecord->pregnancy_occ) }}" placeholder="Pregnancy Occ">
+                            <div style="color: rgb(196, 3, 3)">{{ $errors->first('pregnancy_occ') }}</div>
+                          </div>
+                          <div class="form-group col-md-4">
+                            <label for="next_pregnancy_appox_date">Next Pregnancy Date(approx.)</label>
+                            <input type="date" class="form-control" name="next_pregnancy_appox_date" id="next_pregnancy_appox_date" value="{{ old('next_pregnancy_appox_date', $fetchedRecord->next_pregnancy_appox_date) }}">
+                            <div style="color: rgb(196, 3, 3)">{{ $errors->first('next_pregnancy_appox_date') }}</div>
+                          </div>
                         </div>
-                        <div class="form-group col-md-6">
-                          <label for="mother_id">Mother ID</label>
-                          <input type="text" class="form-control" name="mother_id" id="mother_id" value="{{ old('mother_id') }}" placeholder="Enter Mother ID">
-                          <div style="color: rgb(196, 3, 3)">{{ $errors->first('mother_id') }}</div>
-                        </div>
-                      </div>
-
-
-
-
-
+                      @endif
                     </div>
-                <div class="card-footer">
-                    <button type="submit" class="btn btn-primary">Update</button>
-                </div>
-              </form>
+                    <div class="card-footer">
+                      <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                  </form>
             </div>
           </div>
         </div>

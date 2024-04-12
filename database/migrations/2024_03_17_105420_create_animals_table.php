@@ -30,6 +30,7 @@ return new class extends Migration
             $table->date('next_pregnancy_appox_date')->nullable();
             $table->enum('milking_status', ['Milking','Dry-Period', 'Non-Milking'])->default('Non-Milking');
             $table->string('created_by');
+            $table->string('updated_by');
             $table->enum('status', ['Active','Inactive'])->default('Active');
             $table->string('qr_code')->nullable();
             $table->timestamps();
