@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\EditAnimal;
+use App\Mail\AddNewAnimal;
+use App\Mail\DeleteAnimal;
 use App\Models\AnimalModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\EmailController;
 use Symfony\Component\Console\Input\Input;
 
 class AnimalController extends Controller
@@ -99,6 +104,24 @@ class AnimalController extends Controller
         $animal->created_by = Auth::user()->emp_id;
 
         $animal->save();
+
+
+        // Email Functionality
+
+        $animalID = trim($request->animal_id);
+        $animalBreed = trim($request->breed);
+        $birthDate = $request->birth_date;
+        $gender = $request->gender;
+        $createdBy = Auth::user()->first_name . ' ' . Auth::user()->last_name . ' (' . Auth::user()->emp_id . ')';
+        $dtStamp = now();
+
+        $toEmail = 'hemal.chathuranga91@gmail.com';
+        $mailMessage = 'Added';
+        $subject = 'New Animal ' . $animalID . ' Added to DFMIS.';
+
+        Mail::to($toEmail)->send(new AddNewAnimal($mailMessage, $subject, $animalID, $animalBreed, $birthDate, $gender, $createdBy, $dtStamp));
+
+        //****************************** */
 
         return redirect('admin/animal/list')->with('success', 'New Animal Created Succesfully');
     }
@@ -223,6 +246,25 @@ class AnimalController extends Controller
 
         $animal->save();
 
+
+        // Email Functionality
+
+        $animalID = trim($request->animal_id);
+        $animalBreed = trim($request->breed);
+        $birthDate = $request->birth_date;
+        $gender = $request->gender;
+        $editedBy = Auth::user()->first_name . ' ' . Auth::user()->last_name . ' (' . Auth::user()->emp_id . ')';
+        $dtStamp = now();
+
+        $toEmail = 'hemal.chathuranga91@gmail.com';
+        $mailMessage = 'Edited';
+        $subject = 'Animal ' . $animalID . ' Details updated in DFMIS.';
+
+        Mail::to($toEmail)->send(new EditAnimal($mailMessage, $subject, $animalID, $animalBreed, $birthDate, $gender, $editedBy, $dtStamp));
+
+        //****************************** */
+
+
         return redirect('admin/animal/list')->with('success', 'Animal Info. Updated Succesfully');
     }
 
@@ -233,6 +275,25 @@ class AnimalController extends Controller
     {
         $animal = AnimalModel::getRecByID($id);
         $animal->delete();
+
+        // Email Functionality
+
+        $animalID = trim($animal->animal_id);
+        $animalBreed = trim($animal->breed);
+        $birthDate = $animal->birth_date;
+        $gender = $animal->gender;
+        $deletedBy = Auth::user()->first_name . ' ' . Auth::user()->last_name . ' (' . Auth::user()->emp_id . ')';
+        $dtStamp = now();
+
+        $toEmail = 'hemal.chathuranga91@gmail.com';
+        $mailMessage = 'Deleted';
+        $subject = 'Animal ' . $animalID . ' Details Deleted from DFMIS.';
+
+        Mail::to($toEmail)->send(new DeleteAnimal($mailMessage, $subject, $animalID, $animalBreed, $birthDate, $gender, $deletedBy, $dtStamp));
+
+        //****************************** */
+
+        
 
         return redirect('admin/animal/list')->with('success', 'Animal Info. Deleted Succesfully');
     }

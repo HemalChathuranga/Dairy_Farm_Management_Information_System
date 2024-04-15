@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\DashboardController;
@@ -24,12 +25,14 @@ use App\Http\Controllers\MedicalStaffController;
 */
 
 // Route::get('/1', function () {
-//     return view('message');
+//     return view('test');
 // });
 
-Route::get('/1', function () {
-    return view('admin.animal.edit');
-});
+// Route::get('/1', [EmailController::class, 'sendNewAnimalEmail']);
+
+// Route::get('/1', function () {
+//     return view('admin.animal.edit');
+// });
 
 
 // <--- User Authentication Routes --->
