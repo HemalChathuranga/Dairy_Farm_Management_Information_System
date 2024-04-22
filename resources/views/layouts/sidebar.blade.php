@@ -99,7 +99,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="{{ url('admin/animal/list') }}" class="nav-link @if(Request::segment(2) == 'animal') ? active @endif">
+                <a href="{{ url('animal/animalMgt/list') }}" class="nav-link @if(Request::segment(2) == 'animalMgt') ? active @endif">
                   <i class="nav-icon fas fa-paw"></i>
                   <p>
                     Animal Management

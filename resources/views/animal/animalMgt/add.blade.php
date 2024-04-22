@@ -36,7 +36,7 @@
                     <div class="card-tools">
                       <div class="input-group input-group-sm" style="width: 150px;">
                         <div>
-                          <a href="{{ url('admin/animal/list') }}" class="btn btn-primary float-end"><i class="fas fa-backward"></i> Back</a>
+                          <a href="{{ url('animal/animalMgt/list') }}" class="btn btn-primary float-end"><i class="fas fa-backward"></i> Back</a>
                         </div>
                       </div>
                     </div>

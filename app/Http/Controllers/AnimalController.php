@@ -9,8 +9,6 @@ use App\Models\AnimalModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use App\Http\Controllers\EmailController;
-use Symfony\Component\Console\Input\Input;
 
 class AnimalController extends Controller
 {
@@ -29,7 +27,7 @@ class AnimalController extends Controller
         $data['fetchedRecord'] = AnimalModel::getAnimalRec();
 
         $data['headerTitle'] = 'Animal List';
-        return view('admin.animal.list', $data);
+        return view('animal.animalMgt.list', $data);
     }
 
     /**
@@ -38,7 +36,7 @@ class AnimalController extends Controller
     public function create()
     {
         $data['headerTitle'] = 'Add New Animal';
-        return view('admin.animal.add', $data);
+        return view('animal.animalMgt.add', $data);
     }
 
     /**
@@ -115,15 +113,18 @@ class AnimalController extends Controller
         $createdBy = Auth::user()->first_name . ' ' . Auth::user()->last_name . ' (' . Auth::user()->emp_id . ')';
         $dtStamp = now();
 
-        $toEmail = 'hemal.chathuranga91@gmail.com';
+        $toEmail = 'dfmis.srilanka@gmail.com';
+        $ccEmail = Auth::user()->email;
         $mailMessage = 'Added';
         $subject = 'New Animal ' . $animalID . ' Added to DFMIS.';
 
-        Mail::to($toEmail)->send(new AddNewAnimal($mailMessage, $subject, $animalID, $animalBreed, $birthDate, $gender, $createdBy, $dtStamp));
+        Mail::to($toEmail)
+                ->cc($ccEmail)
+                ->send(new AddNewAnimal($mailMessage, $subject, $animalID, $animalBreed, $birthDate, $gender, $createdBy, $dtStamp));
 
         //****************************** */
 
-        return redirect('admin/animal/list')->with('success', 'New Animal Created Succesfully');
+        return redirect('animal/animalMgt/list')->with('success', 'New Animal Created Succesfully');
     }
 
     /**
@@ -136,7 +137,7 @@ class AnimalController extends Controller
         if (!empty($data['fetchedRecord'])) {
             
             $data['headerTitle'] = 'Animal Info.';
-            return view('admin.animal.view', $data);
+            return view('animal.animalMgt.view', $data);
 
         } else {
             
@@ -154,7 +155,7 @@ class AnimalController extends Controller
         if (!empty($data['fetchedRecord'])) {
             
             $data['headerTitle'] = 'Edit Animal Info.';
-            return view('admin.animal.edit', $data);
+            return view('animal.animalMgt.edit', $data);
 
         } else {
             
@@ -182,8 +183,8 @@ class AnimalController extends Controller
             'father_id' => 'nullable|string',
             'mother_id' => 'nullable|string',
             'status' => 'required|string',
-            'pregnancy_occ' => 'nullable|integer',
-            'next_pregnancy_appox_date' => 'nullable|date',
+            // 'pregnancy_occ' => 'nullable|integer',
+            // 'next_pregnancy_appox_date' => 'nullable|date',
 
         ]);
 
@@ -224,23 +225,23 @@ class AnimalController extends Controller
         $animal->mother_id = trim($request->mother_id);
 
 
-        if ($request->gender == 'Male') {
+        // if ($request->gender == 'Male') {
 
-            $animal->pregnant_status = 'No';
-            $animal->pregnancy_occ = 0;
-        }
-        elseif (empty($request->pregnant_status) ) {
+        //     $animal->pregnant_status = 'No';
+        //     $animal->pregnancy_occ = 0;
+        // }
+        // elseif (empty($request->pregnant_status) ) {
 
-            $animal->pregnant_status = 'No';
-            $animal->pregnancy_occ = 0;
+        //     $animal->pregnant_status = 'No';
+        //     $animal->pregnancy_occ = 0;
             
-        }
-        else {
+        // }
+        // else {
 
-            $animal->pregnant_status = $request->pregnant_status;
-            $animal->pregnancy_occ = $request->pregnancy_occ;
-            $animal->next_pregnancy_appox_date = $request->next_pregnancy_appox_date;
-        }
+        //     $animal->pregnant_status = $request->pregnant_status;
+        //     $animal->pregnancy_occ = $request->pregnancy_occ;
+        //     $animal->next_pregnancy_appox_date = $request->next_pregnancy_appox_date;
+        // }
 
         $animal->updated_by = Auth::user()->emp_id;
 
@@ -248,7 +249,6 @@ class AnimalController extends Controller
 
 
         // Email Functionality
-
         $animalID = trim($request->animal_id);
         $animalBreed = trim($request->breed);
         $birthDate = $request->birth_date;
@@ -256,28 +256,32 @@ class AnimalController extends Controller
         $editedBy = Auth::user()->first_name . ' ' . Auth::user()->last_name . ' (' . Auth::user()->emp_id . ')';
         $dtStamp = now();
 
-        $toEmail = 'hemal.chathuranga91@gmail.com';
+        $toEmail = 'dfmis.srilanka@gmail.com';
+        $ccEmail = Auth::user()->email;
         $mailMessage = 'Edited';
         $subject = 'Animal ' . $animalID . ' Details updated in DFMIS.';
 
-        Mail::to($toEmail)->send(new EditAnimal($mailMessage, $subject, $animalID, $animalBreed, $birthDate, $gender, $editedBy, $dtStamp));
-
+        Mail::to($toEmail)
+                ->cc($ccEmail)
+                ->send(new EditAnimal($mailMessage, $subject, $animalID, $animalBreed, $birthDate, $gender, $editedBy, $dtStamp));
+        
         //****************************** */
 
-
-        return redirect('admin/animal/list')->with('success', 'Animal Info. Updated Succesfully');
+        return redirect('animal/animalMgt/list')->with('success', 'Animal Info. Updated Succesfully');
     }
 
+
+    
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(string $id)
     {
         $animal = AnimalModel::getRecByID($id);
+
         $animal->delete();
 
         // Email Functionality
-
         $animalID = trim($animal->animal_id);
         $animalBreed = trim($animal->breed);
         $birthDate = $animal->birth_date;
@@ -285,16 +289,17 @@ class AnimalController extends Controller
         $deletedBy = Auth::user()->first_name . ' ' . Auth::user()->last_name . ' (' . Auth::user()->emp_id . ')';
         $dtStamp = now();
 
-        $toEmail = 'hemal.chathuranga91@gmail.com';
+        $toEmail = 'dfmis.srilanka@gmail.com';
+        $ccEmail = Auth::user()->email;
         $mailMessage = 'Deleted';
         $subject = 'Animal ' . $animalID . ' Details Deleted from DFMIS.';
 
-        Mail::to($toEmail)->send(new DeleteAnimal($mailMessage, $subject, $animalID, $animalBreed, $birthDate, $gender, $deletedBy, $dtStamp));
+        Mail::to($toEmail)
+                ->cc($ccEmail)
+                ->send(new DeleteAnimal($mailMessage, $subject, $animalID, $animalBreed, $birthDate, $gender, $deletedBy, $dtStamp));
 
         //****************************** */
 
-        
-
-        return redirect('admin/animal/list')->with('success', 'Animal Info. Deleted Succesfully');
+        return redirect('animal/animalMgt/list')->with('success', 'Animal Info. Deleted Succesfully');
     }
 }

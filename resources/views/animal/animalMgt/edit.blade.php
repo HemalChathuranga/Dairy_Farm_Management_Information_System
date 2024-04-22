@@ -36,7 +36,7 @@
                     <div class="card-tools">
                       <div class="input-group input-group-sm" style="width: 150px;">
                         <div>
-                          <a href="{{ url('admin/animal/list') }}" class="btn btn-primary float-end"><i class="fas fa-backward"></i> Back</a>
+                          <a href="{{ url('animal/animalMgt/list') }}" class="btn btn-primary float-end"><i class="fas fa-backward"></i> Back</a>
                         </div>
                       </div>
                     </div>
@@ -145,34 +145,6 @@
                           <div style="color: rgb(196, 3, 3)">{{ $errors->first('mother_id') }}</div>
                         </div>
                       </div>
-
-
-                      <div class="row mt-3">
-                        <h5><u>Current Medical Information</u></h5>
-                      </div>
-                      
-                      @if ($fetchedRecord->gender == "Female")
-                        <div class="row mt-3">
-                          <div class="form-group col-md-4">
-                            <label for="pregnant_status">Pregnant Status</label>
-                            <select class="form-control" name="pregnant_status" id="pregnant_status">
-                              <option {{ (old('pregnant_status', $fetchedRecord->pregnant_status) == 'No') ? 'selected' : '' }} value="No">Not Pregnant</option>
-                              <option {{ (old('pregnant_status', $fetchedRecord->pregnant_status) == 'Yes') ? 'selected' : '' }} value="Yes">Pregnant</option>
-                            </select>
-                            <div style="color: rgb(196, 3, 3)">{{ $errors->first('pregnant_status') }}</div>
-                          </div>
-                          <div class="form-group col-md-4">
-                            <label for="pregnancy_occ">Pregnancy Occ.</label>
-                            <input type="text" class="form-control" name="pregnancy_occ" id="pregnancy_occ" value="{{ old('pregnancy_occ', $fetchedRecord->pregnancy_occ) }}" placeholder="Pregnancy Occ">
-                            <div style="color: rgb(196, 3, 3)">{{ $errors->first('pregnancy_occ') }}</div>
-                          </div>
-                          <div class="form-group col-md-4">
-                            <label for="next_pregnancy_appox_date">Next Pregnancy Date(approx.)</label>
-                            <input type="date" class="form-control" name="next_pregnancy_appox_date" id="next_pregnancy_appox_date" value="{{ old('next_pregnancy_appox_date', $fetchedRecord->next_pregnancy_appox_date) }}">
-                            <div style="color: rgb(196, 3, 3)">{{ $errors->first('next_pregnancy_appox_date') }}</div>
-                          </div>
-                        </div>
-                      @endif
                     </div>
                     <div class="card-footer">
                       <button type="submit" class="btn btn-primary">Update</button>

@@ -105,13 +105,13 @@ Route::group(['middleware' => 'admin'], function(){
     
 
     //Animals CRUD in Admin
-    Route::get('admin/animal/list', [AnimalController::class, 'index']);
-    Route::get('admin/animal/add', [AnimalController::class, 'create']);
-    Route::post('admin/animal/add', [AnimalController::class, 'store']);
-    Route::get('admin/animal/{id}/view', [AnimalController::class, 'show']);
-    Route::get('admin/animal/{id}/edit', [AnimalController::class, 'edit']);
-    Route::post('admin/animal/{id}/edit', [AnimalController::class, 'update']);
-    Route::get('admin/animal/{id}/delete', [AnimalController::class, 'destroy']);
+    Route::get('animal/animalMgt/list', [AnimalController::class, 'index']);
+    Route::get('animal/animalMgt/add', [AnimalController::class, 'create']);
+    Route::post('animal/animalMgt/add', [AnimalController::class, 'store']);
+    Route::get('animal/animalMgt/{id}/view', [AnimalController::class, 'show']);
+    Route::get('animal/animalMgt/{id}/edit', [AnimalController::class, 'edit']);
+    Route::post('animal/animalMgt/{id}/edit', [AnimalController::class, 'update']);
+    Route::get('animal/animalMgt/{id}/delete', [AnimalController::class, 'destroy']);
 
 
 
