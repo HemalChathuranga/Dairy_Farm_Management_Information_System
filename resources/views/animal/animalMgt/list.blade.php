@@ -95,7 +95,7 @@
                     </div>
                     <div class="form-group col-md-3">
                       <button type="submit" class="btn btn-success" style="margin-top: 32px">Search</button>
-                      <a href="{{ url('animal/animalMgt/list') }}" class="btn btn-warning" style="margin-top: 32px">Reset</a>
+                      <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : ((Auth::user()->role == 'Manager') ? 'manager' : 'officeStaff')).'/animal/animalMgt/list') }}" class="btn btn-warning" style="margin-top: 32px">Reset</a>
                     </div>
                   </div>
                 </div>
@@ -118,7 +118,7 @@
                 <div class="card-tools">
                   <div class="input-group input-group-sm" style="width: 150px;">
                     <div>
-                      <a href="{{ url('animal/animalMgt/add') }}" class="btn btn-primary float-end"><i class="fas fa-plus"></i> New Animal</a>
+                      <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : ((Auth::user()->role == 'Manager') ? 'manager' : 'officeStaff')).'/animal/animalMgt/add') }}" class="btn btn-primary float-end"><i class="fas fa-plus"></i> New Animal</a>
                     </div>
                   </div>
                 </div>
@@ -169,9 +169,9 @@
                           <td><span class="{{($item->milking_status == "Milking") ? "badge badge-info" : "badge badge-secondary"}}">{{ $item->milking_status }}</span></td>
                           <td><span class="{{($item->status == "Active") ? "badge badge-success" : "badge badge-danger"}}">{{ $item->status }}</span></td>
                           <td>
-                            <a href="{{ url('animal/animalMgt/'.$item->id.'/view') }}" type="button" class="btn btn-outline-info btn-sm"><i class="fas fa-eye"></i></a>
-                            <a href="{{ url('animal/animalMgt/'.$item->id.'/edit') }}" type="button" class="btn btn-outline-warning btn-sm"><i class="fas fa-pen"></i></a>
-                            <a href="{{ url('animal/animalMgt/'.$item->id.'/delete') }}" type="button" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Record?')"><i class="fas fa-trash"></i></a>
+                            <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : ((Auth::user()->role == 'Manager') ? 'manager' : 'officeStaff')).'/animal/animalMgt/'.$item->id.'/view') }}" type="button" class="btn btn-outline-info btn-sm"><i class="fas fa-eye"></i></a>
+                            <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : ((Auth::user()->role == 'Manager') ? 'manager' : 'officeStaff')).'/animal/animalMgt/'.$item->id.'/edit') }}" type="button" class="btn btn-outline-warning btn-sm"><i class="fas fa-pen"></i></a>
+                            <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : ((Auth::user()->role == 'Manager') ? 'manager' : 'officeStaff')).'/animal/animalMgt/'.$item->id.'/delete') }}" type="button" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Record?')"><i class="fas fa-trash"></i></a>
                           </td>
                         </tr>
                       @endif
@@ -201,9 +201,9 @@
                         <td><span class="{{($item->milking_status == "Milking") ? "badge badge-info" : "badge badge-secondary"}}">{{ $item->milking_status }}</span></td>
                         <td><span class="{{($item->status == "Active") ? "badge badge-success" : "badge badge-danger"}}">{{ $item->status }}</span></td>
                         <td>
-                          <a href="{{ url('animal/animalMgt/'.$item->id.'/view') }}" type="button" class="btn btn-outline-info btn-sm"><i class="fas fa-eye"></i></a>
-                          <a href="{{ url('animal/animalMgt/'.$item->id.'/edit') }}" type="button" class="btn btn-outline-warning btn-sm"><i class="fas fa-pen"></i></a>
-                          <a href="{{ url('animal/animalMgt/'.$item->id.'/delete') }}" type="button" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Record?')"><i class="fas fa-trash"></i></a>
+                          <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : ((Auth::user()->role == 'Manager') ? 'manager' : 'officeStaff')).'/animal/animalMgt/'.$item->id.'/view') }}" type="button" class="btn btn-outline-info btn-sm"><i class="fas fa-eye"></i></a>
+                          <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : ((Auth::user()->role == 'Manager') ? 'manager' : 'officeStaff')).'/animal/animalMgt/'.$item->id.'/edit') }}" type="button" class="btn btn-outline-warning btn-sm"><i class="fas fa-pen"></i></a>
+                          <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : ((Auth::user()->role == 'Manager') ? 'manager' : 'officeStaff')).'/animal/animalMgt/'.$item->id.'/delete') }}" type="button" class="btn btn-outline-danger btn-sm" onclick="return confirm('Are you sure you want to delete this Record?')"><i class="fas fa-trash"></i></a>
                         </td>
                       </tr>                      
                     @endforeach

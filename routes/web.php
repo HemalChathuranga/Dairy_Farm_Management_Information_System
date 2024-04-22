@@ -105,13 +105,13 @@ Route::group(['middleware' => 'admin'], function(){
     
 
     //Animals CRUD in Admin
-    Route::get('animal/animalMgt/list', [AnimalController::class, 'index']);
-    Route::get('animal/animalMgt/add', [AnimalController::class, 'create']);
-    Route::post('animal/animalMgt/add', [AnimalController::class, 'store']);
-    Route::get('animal/animalMgt/{id}/view', [AnimalController::class, 'show']);
-    Route::get('animal/animalMgt/{id}/edit', [AnimalController::class, 'edit']);
-    Route::post('animal/animalMgt/{id}/edit', [AnimalController::class, 'update']);
-    Route::get('animal/animalMgt/{id}/delete', [AnimalController::class, 'destroy']);
+    Route::get('admin/animal/animalMgt/list', [AnimalController::class, 'index']);
+    Route::get('admin/animal/animalMgt/add', [AnimalController::class, 'create']);
+    Route::post('admin/animal/animalMgt/add', [AnimalController::class, 'store']);
+    Route::get('admin/animal/animalMgt/{id}/view', [AnimalController::class, 'show']);
+    Route::get('admin/animal/animalMgt/{id}/edit', [AnimalController::class, 'edit']);
+    Route::post('admin/animal/animalMgt/{id}/edit', [AnimalController::class, 'update']);
+    Route::get('admin/animal/animalMgt/{id}/delete', [AnimalController::class, 'destroy']);
 
 
 
@@ -125,7 +125,7 @@ Route::group(['middleware' => 'manager'], function(){
     Route::get('manager/dashboard', [DashboardController::class, 'index']);
 
 
-    //Office Staff Users CRUD in Admin
+    //Office Staff Users CRUD in Manager
     Route::get('manager/officeStaff/list', [OfficeStaffController::class, 'index']);
     Route::get('manager/officeStaff/add', [OfficeStaffController::class, 'create']);
     Route::post('manager/officeStaff/add', [OfficeStaffController::class, 'store']);
@@ -134,7 +134,7 @@ Route::group(['middleware' => 'manager'], function(){
     Route::post('manager/officeStaff/{id}/edit', [OfficeStaffController::class, 'update']);
 
 
-    //Medical Staff Users CRUD in Admin
+    //Medical Staff Users CRUD in Manager
     Route::get('manager/medicalStaff/list', [MedicalStaffController::class, 'index']);
     Route::get('manager/medicalStaff/add', [MedicalStaffController::class, 'create']);
     Route::post('manager/medicalStaff/add', [MedicalStaffController::class, 'store']);
@@ -143,7 +143,7 @@ Route::group(['middleware' => 'manager'], function(){
     Route::post('manager/medicalStaff/{id}/edit', [MedicalStaffController::class, 'update']);
 
 
-    //Field Staff Users CRUD in Admin
+    //Field Staff Users CRUD in Manager
     Route::get('manager/fieldStaff/list', [FieldStaffController::class, 'index']);
     Route::get('manager/fieldStaff/add', [FieldStaffController::class, 'create']);
     Route::post('manager/fieldStaff/add', [FieldStaffController::class, 'store']);
@@ -152,7 +152,7 @@ Route::group(['middleware' => 'manager'], function(){
     Route::post('manager/fieldStaff/{id}/edit', [FieldStaffController::class, 'update']);
 
 
-    //Stores Staff Users CRUD in Admin
+    //Stores Staff Users CRUD in Manager
     Route::get('manager/storesStaff/list', [StoresStaffController::class, 'index']);
     Route::get('manager/storesStaff/add', [StoresStaffController::class, 'create']);
     Route::post('manager/storesStaff/add', [StoresStaffController::class, 'store']);
@@ -161,6 +161,14 @@ Route::group(['middleware' => 'manager'], function(){
     Route::post('manager/storesStaff/{id}/edit', [StoresStaffController::class, 'update']);
 
 
+    //Animals CRUD in Manager
+    Route::get('manager/animal/animalMgt/list', [AnimalController::class, 'index']);
+    Route::get('manager/animal/animalMgt/add', [AnimalController::class, 'create']);
+    Route::post('manager/animal/animalMgt/add', [AnimalController::class, 'store']);
+    Route::get('manager/animal/animalMgt/{id}/view', [AnimalController::class, 'show']);
+    Route::get('manager/animal/animalMgt/{id}/edit', [AnimalController::class, 'edit']);
+    Route::post('manager/animal/animalMgt/{id}/edit', [AnimalController::class, 'update']);
+    Route::get('manager/animal/animalMgt/{id}/delete', [AnimalController::class, 'destroy']);
 
     
     
@@ -174,6 +182,14 @@ Route::group(['middleware' => 'officeStaff'], function(){
     Route::get('officeStaff/dashboard', [DashboardController::class, 'index']);
 
 
+    //Animals CRUD in Office Staff
+    Route::get('officeStaff/animal/animalMgt/list', [AnimalController::class, 'index']);
+    Route::get('officeStaff/animal/animalMgt/add', [AnimalController::class, 'create']);
+    Route::post('officeStaff/animal/animalMgt/add', [AnimalController::class, 'store']);
+    Route::get('officeStaff/animal/animalMgt/{id}/view', [AnimalController::class, 'show']);
+    Route::get('officeStaff/animal/animalMgt/{id}/edit', [AnimalController::class, 'edit']);
+    Route::post('officeStaff/animal/animalMgt/{id}/edit', [AnimalController::class, 'update']);
+    Route::get('officeStaff/animal/animalMgt/{id}/delete', [AnimalController::class, 'destroy']);
     
     
 });

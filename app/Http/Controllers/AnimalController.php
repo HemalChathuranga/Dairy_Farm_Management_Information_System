@@ -124,7 +124,15 @@ class AnimalController extends Controller
 
         //****************************** */
 
-        return redirect('animal/animalMgt/list')->with('success', 'New Animal Created Succesfully');
+        if (Auth::user()->role == 'Admin') {
+            return redirect('admin/animal/animalMgt/list')->with('success', 'New Animal Created Succesfully');
+        }
+        elseif (Auth::user()->role == 'Manager') {
+            return redirect('manager/animal/animalMgt/list')->with('success', 'New Animal Created Succesfully');
+        }
+        else {
+            return redirect('officeStaff/animal/animalMgt/list')->with('success', 'New Animal Created Succesfully');
+        }
     }
 
     /**
@@ -266,8 +274,18 @@ class AnimalController extends Controller
                 ->send(new EditAnimal($mailMessage, $subject, $animalID, $animalBreed, $birthDate, $gender, $editedBy, $dtStamp));
         
         //****************************** */
+        
+        
+        if (Auth::user()->role == 'Admin') {
+            return redirect('admin/animal/animalMgt/list')->with('success', 'Animal Info. Updated Succesfully');
+        }
+        elseif (Auth::user()->role == 'Manager') {
+            return redirect('manager/animal/animalMgt/list')->with('success', 'Animal Info. Updated Succesfully');
+        }
+        else {
+            return redirect('officeStaff/animal/animalMgt/list')->with('success', 'Animal Info. Updated Succesfully');
+        }
 
-        return redirect('animal/animalMgt/list')->with('success', 'Animal Info. Updated Succesfully');
     }
 
 
@@ -300,6 +318,16 @@ class AnimalController extends Controller
 
         //****************************** */
 
-        return redirect('animal/animalMgt/list')->with('success', 'Animal Info. Deleted Succesfully');
+
+        if (Auth::user()->role == 'Admin') {
+            return redirect('admin/animal/animalMgt/list')->with('success', 'Animal Info. Deleted Succesfully');
+        }
+        elseif (Auth::user()->role == 'Manager') {
+            return redirect('manager/animal/animalMgt/list')->with('success', 'Animal Info. Deleted Succesfully');
+        }
+        else {
+            return redirect('officeStaff/animal/animalMgt/list')->with('success', 'Animal Info. Deleted Succesfully');
+        }
+
     }
 }

@@ -99,7 +99,7 @@
               </li>
 
               <li class="nav-item">
-                <a href="{{ url('animal/animalMgt/list') }}" class="nav-link @if(Request::segment(2) == 'animalMgt') ? active @endif">
+                <a href="{{ url('admin/animal/animalMgt/list') }}" class="nav-link @if(Request::segment(3) == 'animalMgt') ? active @endif">
                   <i class="nav-icon fas fa-paw"></i>
                   <p>
                     Animal Management
@@ -181,6 +181,14 @@
                 </ul>
               </li>
 
+              <li class="nav-item">
+                <a href="{{ url('manager/animal/animalMgt/list') }}" class="nav-link @if(Request::segment(3) == 'animalMgt') ? active @endif">
+                  <i class="nav-icon fas fa-paw"></i>
+                  <p>
+                    Animal Management
+                  </p>
+                </a>
+              </li>
 
 
               <li class="nav-item">
@@ -210,6 +218,16 @@
                   </p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="{{ url('officeStaff/animal/animalMgt/list') }}" class="nav-link @if(Request::segment(3) == 'animalMgt') ? active @endif">
+                  <i class="nav-icon fas fa-paw"></i>
+                  <p>
+                    Animal Management
+                  </p>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a href="{{ url('profile') }}" class="nav-link @if(Request::segment(1) == 'profile') ? active @endif">
                   <i class="nav-icon fas fa-address-card"></i>
