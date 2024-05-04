@@ -107,6 +107,15 @@
                 </a>
               </li>
 
+              <li class="nav-item">
+                <a href="{{ url('animal/animalInfo/view') }}" class="nav-link @if(Request::segment(2) == 'animalInfo') ? active @endif">
+                  <i class="nav-icon fas fa-paw"></i>
+                  <p>
+                    Animal Info.
+                  </p>
+                </a>
+              </li>
+
 
               <li class="nav-item">
                 <a href="{{ url('profile') }}" class="nav-link @if(Request::segment(1) == 'profile') ? active @endif">
@@ -190,6 +199,14 @@
                 </a>
               </li>
 
+              <li class="nav-item">
+                <a href="{{ url('animal/animalInfo/view') }}" class="nav-link @if(Request::segment(2) == 'animalInfo') ? active @endif">
+                  <i class="nav-icon fas fa-paw"></i>
+                  <p>
+                    Animal Info.
+                  </p>
+                </a>
+              </li>
 
               <li class="nav-item">
                 <a href="{{ url('profile') }}" class="nav-link @if(Request::segment(1) == 'profile') ? active @endif">
@@ -229,6 +246,15 @@
               </li>
 
               <li class="nav-item">
+                <a href="{{ url('animal/animalInfo/view') }}" class="nav-link @if(Request::segment(2) == 'animalInfo') ? active @endif">
+                  <i class="nav-icon fas fa-paw"></i>
+                  <p>
+                    Animal Info.
+                  </p>
+                </a>
+              </li>
+
+              <li class="nav-item">
                 <a href="{{ url('profile') }}" class="nav-link @if(Request::segment(1) == 'profile') ? active @endif">
                   <i class="nav-icon fas fa-address-card"></i>
                   <p>
@@ -255,6 +281,16 @@
                   </p>
                 </a>
               </li>
+
+              <li class="nav-item">
+                <a href="{{ url('animal/animalInfo/view') }}" class="nav-link @if(Request::segment(2) == 'animalInfo') ? active @endif">
+                  <i class="nav-icon fas fa-paw"></i>
+                  <p>
+                    Animal Info.
+                  </p>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a href="{{ url('profile') }}" class="nav-link @if(Request::segment(1) == 'profile') ? active @endif">
                   <i class="nav-icon fas fa-address-card"></i>
@@ -282,6 +318,16 @@
                   </p>
                 </a>
               </li>
+              
+              <li class="nav-item">
+                <a href="{{ url('animal/animalInfo/view') }}" class="nav-link @if(Request::segment(2) == 'animalInfo') ? active @endif">
+                  <i class="nav-icon fas fa-paw"></i>
+                  <p>
+                    Animal Info.
+                  </p>
+                </a>
+              </li>
+
               <li class="nav-item">
                 <a href="{{ url('profile') }}" class="nav-link @if(Request::segment(1) == 'profile') ? active @endif">
                   <i class="nav-icon fas fa-address-card"></i>

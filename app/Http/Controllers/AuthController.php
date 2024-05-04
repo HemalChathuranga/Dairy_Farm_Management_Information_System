@@ -51,23 +51,23 @@ class AuthController extends Controller
 
                 return redirect('admin/dashboard');
             }
-            elseif(Auth::user()->role == 'Manager'){
+            elseif(Auth::user()->role == 'Manager' && Auth::user()->status == "Active"){
 
                 return redirect('manager/dashboard');
             }
-            elseif(Auth::user()->role == 'Office Staff'){
+            elseif(Auth::user()->role == 'Office Staff' && Auth::user()->status == "Active"){
 
                 return redirect('officeStaff/dashboard');
             }
-            elseif(Auth::user()->role == 'Medical Staff'){
+            elseif(Auth::user()->role == 'Medical Staff' && Auth::user()->status == "Active"){
 
                 return redirect('medicalStaff/dashboard');
             }
-            elseif(Auth::user()->role == 'Field Staff'){
+            elseif(Auth::user()->role == 'Field Staff' && Auth::user()->status == "Active"){
 
                 return redirect('fieldStaff/dashboard');
             }
-            elseif(Auth::user()->role == 'Stores Staff'){
+            elseif(Auth::user()->role == 'Stores Staff' && Auth::user()->status == "Active"){
 
                 return redirect('storesStaff/dashboard');
             }

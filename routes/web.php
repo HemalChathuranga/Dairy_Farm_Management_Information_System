@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\EmailController;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\DashboardController;
@@ -112,6 +111,9 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('admin/animal/animalMgt/{id}/edit', [AnimalController::class, 'edit']);
     Route::post('admin/animal/animalMgt/{id}/edit', [AnimalController::class, 'update']);
     Route::get('admin/animal/animalMgt/{id}/delete', [AnimalController::class, 'destroy']);
+
+
+    
 
 
 
@@ -233,12 +235,22 @@ Route::group(['middleware' => 'storesStaff'], function(){
 
 
 
-//Middleware group for all users Profile tab feature
+//Middleware group for all authenticated users
 Route::group(['middleware' => 'user'], function(){
     Route::get('profile', [UserController::class, 'showProfile']);
     Route::get('change_password', [UserController::class, 'show_change_password']);
     Route::post('change_password', [UserController::class, 'update_change_password']);
     Route::get('change_prof_pic', [UserController::class, 'show_change_prof_pic']);
     Route::post('change_prof_pic', [UserController::class, 'update_change_prof_pic']);
+
+
+    //Animal Info in Admin
+    Route::get('animal/animalInfo/view', [AnimalController::class, 'aniInfoIndex']);
+    Route::get('animal/animalInfo/qr-scanner/search', [AnimalController::class, 'aniInfoIndex']);
+
+    //QR Scanner
+    Route::get('animal/animalInfo/qr-scanner', function () {
+        return view('animal.animalInfo.qr-scanner');
+    });
 
 });

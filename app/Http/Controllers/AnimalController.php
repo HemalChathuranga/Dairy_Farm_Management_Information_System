@@ -111,6 +111,7 @@ class AnimalController extends Controller
         $birthDate = $request->birth_date;
         $gender = $request->gender;
         $createdBy = Auth::user()->first_name . ' ' . Auth::user()->last_name . ' (' . Auth::user()->emp_id . ')';
+        date_default_timezone_set('Asia/Colombo');
         $dtStamp = now();
 
         $toEmail = 'dfmis.srilanka@gmail.com';
@@ -262,6 +263,7 @@ class AnimalController extends Controller
         $birthDate = $request->birth_date;
         $gender = $request->gender;
         $editedBy = Auth::user()->first_name . ' ' . Auth::user()->last_name . ' (' . Auth::user()->emp_id . ')';
+        date_default_timezone_set('Asia/Colombo');
         $dtStamp = now();
 
         $toEmail = 'dfmis.srilanka@gmail.com';
@@ -305,6 +307,7 @@ class AnimalController extends Controller
         $birthDate = $animal->birth_date;
         $gender = $animal->gender;
         $deletedBy = Auth::user()->first_name . ' ' . Auth::user()->last_name . ' (' . Auth::user()->emp_id . ')';
+        date_default_timezone_set('Asia/Colombo');
         $dtStamp = now();
 
         $toEmail = 'dfmis.srilanka@gmail.com';
@@ -330,4 +333,20 @@ class AnimalController extends Controller
         }
 
     }
+
+    
+    //Functions for Animal Info Menu
+
+    public function aniInfoIndex(Request $request)
+    {
+    
+        $data['aniID'] = $request->animal_id;
+
+        $data['fetchedRecord'] = AnimalModel::getRecByAniID($request->animal_id);
+
+        $data['headerTitle'] = 'Animal List';
+        return view('animal.animalInfo.view', $data);
+    }
+
+
 }

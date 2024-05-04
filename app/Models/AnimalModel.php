@@ -57,8 +57,6 @@ class AnimalModel extends Model
         return Carbon::parse($this->birth_date)->age;
     }
 
-
-
     //Fetch Animal records
     static public function getAnimalRec(){
 
@@ -116,6 +114,17 @@ class AnimalModel extends Model
     static public function getRecByID($id){
 
         return self::findOrFail($id);
+    }
+
+
+    //Fetch Animal record for Animal Info
+    static public function getRecByAniID($animal_id){
+
+        // $return = self::SELECT('animals.*');
+        $return = self::WHERE('animal_id', $animal_id)->first();
+
+        // dd($return);
+        return $return;
     }
 
 }
