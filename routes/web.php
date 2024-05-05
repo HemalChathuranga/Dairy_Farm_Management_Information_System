@@ -23,9 +23,9 @@ use App\Http\Controllers\MedicalStaffController;
 |
 */
 
-// Route::get('/1', function () {
-//     return view('test');
-// });
+Route::get('admin/milkParlor/add_milking_queue', function () {
+    return view('milkParlor.add_milking_queue');
+});
 
 // Route::get('/1', [EmailController::class, 'sendNewAnimalEmail']);
 

@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1><i class="nav-icon fas fa-paw"></i> Animal Info.</h1>
+            <h1><i class="nav-icon fas fa-cow"></i> Daily Milking</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->

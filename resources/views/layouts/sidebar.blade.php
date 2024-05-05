@@ -56,6 +56,7 @@
 
                   <li class="nav-item">
                     <a href="{{ url('admin/manager/list') }}" class="nav-link @if(Request::segment(2) == 'manager') ? active @endif">
+                      <i class="nav-icon fas"></i>
                       <i class="nav-icon fas fa-user-tie"></i>
                       <p>
                         Manager
@@ -64,6 +65,7 @@
                   </li>
                   <li class="nav-item">
                     <a href="{{ url('admin/officeStaff/list') }}" class="nav-link @if(Request::segment(2) == 'officeStaff') ? active @endif">
+                      <i class="nav-icon fas"></i>
                       <i class="nav-icon fas fa-user-tie"></i>
                       <p>
                         Office Staff
@@ -72,6 +74,7 @@
                   </li>
                   <li class="nav-item">
                     <a href="{{ url('admin/medicalStaff/list') }}" class="nav-link @if(Request::segment(2) == 'medicalStaff') ? active @endif">
+                      <i class="nav-icon fas"></i>
                       <i class="nav-icon fas fa-user-nurse"></i>
                       <p>
                         Medical Staff
@@ -80,7 +83,8 @@
                   </li>
                   <li class="nav-item">
                     <a href="{{ url('admin/fieldStaff/list') }}" class="nav-link @if(Request::segment(2) == 'fieldStaff') ? active @endif">
-                      <i class="nav-icon fas fa-user-tie"></i>
+                      <i class="nav-icon fas"></i>
+                      <i class="nav-icon fas fa-hat-cowboy-side"></i>
                       <p>
                         Field Staff
                       </p>
@@ -88,6 +92,7 @@
                   </li>
                   <li class="nav-item">
                     <a href="{{ url('admin/storesStaff/list') }}" class="nav-link @if(Request::segment(2) == 'storesStaff') ? active @endif">
+                      <i class="nav-icon fas"></i>
                       <i class="nav-icon fas fa-user-tie"></i>
                       <p>
                         Stores Staff
@@ -115,6 +120,38 @@
                   </p>
                 </a>
               </li>
+
+              <li class="nav-item @if(Request::segment(2) == 'milkParlor') ? menu-open @endif">
+                <a href="" class="nav-link @if(Request::segment(2) == 'milkParlor') ? active @endif">
+                  <i class="nav-icon fas fa-cow"></i>
+                  <p>
+                    Milk Parlor
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ url('admin/milkParlor/add_milking_queue') }}" class="nav-link @if(Request::segment(3) == 'add_milking_queue') ? active @endif">
+                      <i class="nav-icon fas"></i>
+                      <i class="nav-icon fas fa-cow"></i>
+                      <p>
+                        Daily Milking
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ url('admin/milkParlor/milking_info') }}" class="nav-link @if(Request::segment(3) == 'milking_info') ? active @endif">
+                      <i class="nav-icon fas"></i>
+                      <i class="nav-icon fas fa-cow"></i>
+                      <p>
+                        Milking Info.
+                      </p>
+                    </a>
+                  </li>
+                </ul> 
+              </li>   
+
+
 
 
               <li class="nav-item">
@@ -157,6 +194,7 @@
 
                   <li class="nav-item">
                     <a href="{{ url('manager/officeStaff/list') }}" class="nav-link @if(Request::segment(2) == 'officeStaff') ? active @endif">
+                      <i class="nav-icon fas"></i>
                       <i class="nav-icon fas fa-user-tie"></i>
                       <p>
                         Office Staff
@@ -165,6 +203,7 @@
                   </li>
                   <li class="nav-item">
                     <a href="{{ url('manager/medicalStaff/list') }}" class="nav-link @if(Request::segment(2) == 'medicalStaff') ? active @endif">
+                      <i class="nav-icon fas"></i>
                       <i class="nav-icon fas fa-user-nurse"></i>
                       <p>
                         Medical Staff
@@ -173,7 +212,8 @@
                   </li>
                   <li class="nav-item">
                     <a href="{{ url('manager/fieldStaff/list') }}" class="nav-link @if(Request::segment(2) == 'fieldStaff') ? active @endif">
-                      <i class="nav-icon fas fa-user-tie"></i>
+                      <i class="nav-icon fas"></i>
+                      <i class="nav-icon fas fa-hat-cowboy-side"></i>
                       <p>
                         Field Staff
                       </p>
@@ -181,6 +221,7 @@
                   </li>
                   <li class="nav-item">
                     <a href="{{ url('manager/storesStaff/list') }}" class="nav-link @if(Request::segment(2) == 'storesStaff') ? active @endif">
+                      <i class="nav-icon fas"></i>
                       <i class="nav-icon fas fa-user-tie"></i>
                       <p>
                         Stores Staff
