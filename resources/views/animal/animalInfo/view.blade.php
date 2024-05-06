@@ -58,7 +58,7 @@
                     <div class="card-tools">
                       <div class="input-group input-group-sm" style="width: 150px;">
                         <div>
-                          <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : ((Auth::user()->role == 'Manager') ? 'manager' : 'officeStaff')).'/animal/animalInfo/view') }}" class="btn btn-primary float-end"><i class="fas fa-backward"></i> Back</a>
+                          <a href="{{ url('animal/animalInfo/view') }}" class="btn btn-primary float-end"><i class="fas fa-backward"></i> Back</a>
                         </div>
                       </div>
                     </div>

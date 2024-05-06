@@ -52,9 +52,9 @@ class AnimalController extends Controller
             'breed' => 'required|string',
             'gender' => 'required|string',
             'stall_number' => 'required|string',
-            'weight_at_birth' => 'nullable|decimal',
-            'height_at_birth' => 'nullable|decimal',
-            'buy_price' => 'nullable|decimal',
+            'weight_at_birth' => 'nullable',
+            'height_at_birth' => 'nullable',
+            'buy_price' => 'nullable',
             'buy_date' => 'nullable|date',
             'notes' => 'nullable|string',
             'father_id' => 'nullable|string',
@@ -344,7 +344,7 @@ class AnimalController extends Controller
 
         $data['fetchedRecord'] = AnimalModel::getRecByAniID($request->animal_id);
 
-        $data['headerTitle'] = 'Animal List';
+        $data['headerTitle'] = 'Animal Info.';
         return view('animal.animalInfo.view', $data);
     }
 

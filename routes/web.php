@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\ManagerController;
+use App\Http\Controllers\MilkingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FieldStaffController;
 use App\Http\Controllers\OfficeStaffController;
@@ -22,10 +23,6 @@ use App\Http\Controllers\MedicalStaffController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-Route::get('admin/milkParlor/add_milking_queue', function () {
-    return view('milkParlor.add_milking_queue');
-});
 
 // Route::get('/1', [EmailController::class, 'sendNewAnimalEmail']);
 
@@ -102,7 +99,6 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('admin/storesStaff/{id}/delete', [StoresStaffController::class, 'destroy']);
 
     
-
     //Animals CRUD in Admin
     Route::get('admin/animal/animalMgt/list', [AnimalController::class, 'index']);
     Route::get('admin/animal/animalMgt/add', [AnimalController::class, 'create']);
@@ -113,10 +109,25 @@ Route::group(['middleware' => 'admin'], function(){
     Route::get('admin/animal/animalMgt/{id}/delete', [AnimalController::class, 'destroy']);
 
 
+
+    //Milking features in Admin
+
+    Route::get('admin/milkParlor/add_milking_queue', [MilkingController::class, 'indexTempRec']);
+    Route::post('admin/milkParlor/add_milking_queue', [MilkingController::class, 'storeTempRec']);
+    Route::get('admin/milkParlor/add_milking_queue/{id}/delete', [MilkingController::class, 'destroyTempRec']);
+    Route::get('admin/milkParlor/add_milking_queue/reset', [MilkingController::class, 'destroyAllTempRec']);
     
 
+    //QR Scanner
+    Route::get('admin/milkParlor/qr-scanner', function () {
+        return view('milkParlor.qr-scanner');
+    });
 
+    Route::post('admin/milkParlor/qr-scanner', [MilkingController::class, 'addQRData']);
 
+    
+    
+    
 
 });
 

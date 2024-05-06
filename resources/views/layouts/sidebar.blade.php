@@ -84,7 +84,7 @@
                   <li class="nav-item">
                     <a href="{{ url('admin/fieldStaff/list') }}" class="nav-link @if(Request::segment(2) == 'fieldStaff') ? active @endif">
                       <i class="nav-icon fas"></i>
-                      <i class="nav-icon fas fa-hat-cowboy-side"></i>
+                      <i class="nav-icon fas fa-hat-cowboy"></i>
                       <p>
                         Field Staff
                       </p>
@@ -213,7 +213,7 @@
                   <li class="nav-item">
                     <a href="{{ url('manager/fieldStaff/list') }}" class="nav-link @if(Request::segment(2) == 'fieldStaff') ? active @endif">
                       <i class="nav-icon fas"></i>
-                      <i class="nav-icon fas fa-hat-cowboy-side"></i>
+                      <i class="nav-icon fas fa-hat-cowboy"></i>
                       <p>
                         Field Staff
                       </p>

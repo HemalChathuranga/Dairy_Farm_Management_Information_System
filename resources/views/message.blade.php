@@ -1,21 +1,51 @@
 
 @if (!empty(session('success')))
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <a href="" class="btn btn-outline-light btn-sm"><strong>X</strong></a><strong>  Success!</strong> {{ session('success') }}
+<div class="row">
+  <div class="col-md-11">
+    <div class="row alert alert-success">
+      <div class="col-md-11">
+        Success! </strong> {{ session('success') }}
+      </div>
+      <div class="col-md-1">
+        <a href="" class="btn btn-outline-light btn-sm"><strong></strong>X</a>
+      </div>
+    </div>
   </div>
+</div>
 @endif
 
+
 @if (!empty(session('error')))
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-  <a href="" class="btn btn-outline-light btn-sm"><strong></strong>X</a><strong>  Error!</strong> {{ session('error') }}
+<div class="row">
+  <div class="col-md-11">
+    <div class="row alert alert-danger">
+      <div class="col-md-11">
+        Error! </strong> {{ session('error') }}
+      </div>
+      <div class="col-md-1">
+        <a href="" class="btn btn-outline-light btn-sm"><strong></strong>X</a>
+      </div>
+    </div>
   </div>
+</div>
 @endif
 
 @if (!empty(session('info')))
-  <div class="alert alert-info alert-dismissible fade show" role="alert">
-    <a href="" class="btn btn-outline-light btn-sm"><strong>X</strong></a><strong>  Info!</strong> {{ session('info') }}
+<div class="row">
+  <div class="col-md-11">
+    <div class="row alert alert-info">
+      <div class="col-md-11">
+        Info! </strong> {{ session('info') }}
+      </div>
+      <div class="col-md-1">
+        <a href="" class="btn btn-outline-light btn-sm"><strong></strong>X</a>
+      </div>
+    </div>
   </div>
+</div>
 @endif
+
+
 {{-- 
   <div class="alert alert-warning alert-dismissible fade show" role="alert">
     <strong>Warning!</strong> This alert box could indicate a warning that might need attention.

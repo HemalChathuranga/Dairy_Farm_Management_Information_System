@@ -120,7 +120,6 @@ class AnimalModel extends Model
     //Fetch Animal record for Animal Info
     static public function getRecByAniID($animal_id){
 
-        // $return = self::SELECT('animals.*');
         $return = self::WHERE('animal_id', $animal_id)->first();
 
         // dd($return);
