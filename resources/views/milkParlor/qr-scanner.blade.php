@@ -13,20 +13,18 @@
 </head>
 <body>
 
-    {{-- <div class="container">
-        <div class="row">
-            <div class="col-md-6">
-                <video id="preview" width="100%"></video>
-            </div>
-            <div class="col-md-6">
-                <label for="">SCAN QR</label>
-                <input type="text" name="text" id="text" class="form-control" placeholder="Scan QR">
-            </div>
-        </div>
-    </div> --}}
+    @if ($errors->any())
+          <script>
+            window.onload = function() {
+                @foreach ($errors->all() as $error)
+                    alert("{{ $error }}");
+                @endforeach
+            };
+          </script>
+    @endif
 
     <div class="container">
-        <form action="" method="POST">
+        <form action="/admin/milkParlor/add_milking_queue" method="POST">
             @csrf
             <div class="row justify-content-center">
                 <div id='qr_code' class="row justify-content-center">

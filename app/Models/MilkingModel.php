@@ -23,4 +23,13 @@ class MilkingModel extends Model
         'eve_updated_by',
         'eve_updated_date',
     ];
+
+    static public function getTodayMilkingRec($animal_id, $todayDate){
+
+        $return = self::WHERE('animal_id', $animal_id)
+                        ->WHERE('milking_date','=', $todayDate)
+                        ->first();
+
+        return $return;
+    }
 }

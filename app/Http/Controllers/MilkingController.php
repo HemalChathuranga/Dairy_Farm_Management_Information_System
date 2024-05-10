@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AnimalModel;
+use App\Models\MilkingModel;
 use Illuminate\Http\Request;
 use App\Models\MilkingTempModel;
 use Illuminate\Support\Facades\Auth;
@@ -31,7 +32,91 @@ class MilkingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+
+            'cow.*' => 'required',
+
+        ], [
+
+            'cow.*' => 'Please Input Milk Volume for :attribute',
+
+        ]);
+
+
+        date_default_timezone_set('Asia/Colombo');
+        $todayDate = date('Y-m-d');
+        $timeStamp = date('A');
+
+        //Store Milking details of the Morning Session
+        if ($timeStamp == 'AM') {
+
+            foreach($request->ani_id as $key=>$ani_id){
+            
+                $data = new MilkingModel();
+    
+                $data->milking_date = $todayDate;
+                $data->animal_id = $ani_id;
+                $data->Morning_vol = $request->cow[$key];
+                $data->mor_added_by = Auth::user()->emp_id;
+    
+                $data->save();
+    
+            }
+
+            MilkingTempModel::truncate();
+
+            if (Auth::user()->role == 'Admin') {
+                return redirect('admin/milkParlor/add_milking_queue')->with('success', 'Milking Records added Successfully.');
+            }
+            else {
+                return redirect('fieldStaff/milkParlor/add_milking_queue')->with('success', 'Milking Records added Successfully.');
+            }
+
+        }
+        //Store Milking details of the Evening Session
+        else {
+
+            foreach($request->ani_id as $key=>$ani_id){
+
+                //Fetching Milking details of the cow for current date to check whether the cow already Milked for the day
+                $fetchTodayMilkingRec = MilkingModel::getTodayMilkingRec($ani_id, $todayDate);
+
+                //Check If Animal is available in the milking table for today
+                if (!empty($fetchTodayMilkingRec)) {
+
+                    $data = $fetchTodayMilkingRec;
+
+                    $data->evening_vol = $request->cow[$key];
+                    $data->eve_added_by = Auth::user()->emp_id;
+        
+                    $data->save();
+                }
+                else {
+
+                    $data = new MilkingModel();
+        
+                    $data->milking_date = $todayDate;
+                    $data->animal_id = $ani_id;
+                    $data->evening_vol = $request->cow[$key];
+                    $data->eve_added_by = Auth::user()->emp_id;
+        
+                    $data->save();
+
+                }
+
+            }
+
+            MilkingTempModel::truncate();
+    
+                if (Auth::user()->role == 'Admin') {
+                    return redirect('admin/milkParlor/add_milking_queue')->with('success', 'Milking Records added Successfully.');
+                }
+                else {
+                    return redirect('fieldStaff/milkParlor/add_milking_queue')->with('success', 'Milking Records added Successfully.');
+                }
+
+        }
+
     }
 
     /**
@@ -84,17 +169,12 @@ class MilkingController extends Controller
 
         $fromQR = trim($request->animal_id);
 
-        // $data['fetchedRecord'] = MilkingTempModel::all();
-
-        // $data['headerTitle'] = 'Milking Queue';
-        // return view('milkParlor.add_milking_queue', $data);
-
         return redirect('admin/milkParlor/add_milking_queue')->with('qrValue', $fromQR);
 
     }
     
 
-    //Store animla IDs to the temp. table
+    //Store animal IDs to the temp. table
     public function storeTempRec(Request $request)
     {
         $request->validate([
@@ -109,28 +189,108 @@ class MilkingController extends Controller
         ]);
 
 
-        $fetchMainTblRec = AnimalModel::getRecByAniID($request->animal_id);
+        //Fetching Animal details of the cow to be added to the queue to check the Milking status
+        $fetchAnimalRec = AnimalModel::getRecByAniID($request->animal_id);
 
-        if ($fetchMainTblRec->milking_status == 'Milking') {
-            $animal = new MilkingTempModel();
 
-        $animal->animal_id = trim($request->animal_id);
+        //Fetching Milking details of the cow for current date to check whether the cow already Milked for the day
+        date_default_timezone_set('Asia/Colombo');
+        $todayDate = date('Y-m-d');
+        $timeStamp = date('A');
 
-        $animal->save();
+        $fetchTodayMilkingRec = MilkingModel::getTodayMilkingRec($request->animal_id, $todayDate);
 
-        if (Auth::user()->role == 'Admin') {
-            return redirect('admin/milkParlor/add_milking_queue')->with('success', 'Animal Added to the Queue Succesfully');
+
+        //Check if the selected cow is fit for Milking
+        if ($fetchAnimalRec->milking_status == 'Milking') {
+
+            //Checkings for adding a cow to Morning queue
+            if ($timeStamp == 'AM') {
+
+                //Check If Animal is available in the milking table for today
+                if (!empty($fetchTodayMilkingRec)) {
+
+                    if (Auth::user()->role == 'Admin') {
+                        return redirect('admin/milkParlor/add_milking_queue')->with('error', 'Selected Animal already Milked for Morning Session');
+                    }
+                    else {
+                        return redirect('fieldStaff/milkParlor/add_milking_queue')->with('error', 'Selected Animal already Milked for Morning Session');
+                    }
+                    
+                }
+                else {
+
+                    $animal = new MilkingTempModel();
+                    $animal->animal_id = trim($request->animal_id);
+                    $animal->save();
+
+                    if (Auth::user()->role == 'Admin') {
+                        return redirect('admin/milkParlor/add_milking_queue')->with('success', 'Animal Added to the Queue Succesfully');
+                    }
+                    else {
+                        return redirect('fieldStaff/milkParlor/add_milking_queue')->with('success', 'Animal Added to the Queue Succesfully');
+                    }
+                }
+                
+            }
+            //Checkings for adding a cow to Evening queue
+            else {
+
+                //Check If Animal is available in the milking table for today
+                if (!empty($fetchTodayMilkingRec)) {
+
+                    if (($fetchTodayMilkingRec->evening_vol) > 0.00) {
+
+                        if (Auth::user()->role == 'Admin') {
+                            return redirect('admin/milkParlor/add_milking_queue')->with('error', 'Selected Animal already Milked for Evening Session');
+                        }
+                        else {
+                            return redirect('fieldStaff/milkParlor/add_milking_queue')->with('error', 'Selected Animal already Milked for Evening Session');
+                        }
+                    }
+                    else {
+                        $animal = new MilkingTempModel();
+                        $animal->animal_id = trim($request->animal_id);
+                        $animal->save();
+
+                        if (Auth::user()->role == 'Admin') {
+                            return redirect('admin/milkParlor/add_milking_queue')->with('success', 'Animal Added to the Queue Succesfully');
+                        }
+                        else {
+                            return redirect('fieldStaff/milkParlor/add_milking_queue')->with('success', 'Animal Added to the Queue Succesfully');
+                        }
+                    }
+
+                }
+                else {
+
+                    $animal = new MilkingTempModel();
+                    $animal->animal_id = trim($request->animal_id);
+                    $animal->save();
+
+                    if (Auth::user()->role == 'Admin') {
+                        return redirect('admin/milkParlor/add_milking_queue')->with('success', 'Animal Added to the Queue Succesfully');
+                    }
+                    else {
+                        return redirect('fieldStaff/milkParlor/add_milking_queue')->with('success', 'Animal Added to the Queue Succesfully');
+                    }
+
+                }
+
+            }
+
         }
         else {
-            return redirect('fieldStaff/milkParlor/add_milking_queue')->with('success', 'Animal Added to the Queue Succesfully');
-        }
-            
-        }
-        else {
-            return redirect('admin/milkParlor/add_milking_queue')->with('error', 'Selected Animal not Fit for Milking');
+
+            if (Auth::user()->role == 'Admin') {
+                return redirect('admin/milkParlor/add_milking_queue')->with('error', 'Selected Animal not Fit for Milking');
+            }
+            else {
+                return redirect('fieldStaff/milkParlor/add_milking_queue')->with('error', 'Selected Animal not Fit for Milking');
+            }
+
         }
 
-        
     }
 
 

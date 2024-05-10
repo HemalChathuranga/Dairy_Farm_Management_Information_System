@@ -9,6 +9,7 @@
           <div class="col-sm-6">
             <h1><i class="nav-icon fas fa-cow"></i> Daily Milking</h1>
           </div>
+
           <div class="col-sm-6">
             {{-- session messages --}}
             @include('message')
@@ -31,7 +32,7 @@
                       </div>
                     </div>
                   </div>
-                  @endif
+            @endif
 
           </div>
         </div>
@@ -70,7 +71,7 @@
                     </div>
                     <div class="form-group col-md-2">
                       <label for="animal_id">Animal ID</label>
-                      <input type="text" class="form-control" name="animal_id" id="animal_id" value="{{ session('qrValue') }}" placeholder="Animal. ID">
+                      <input type="text" class="form-control" name="animal_id" id="animal_id" value="{{ old('animal_id') }}" placeholder="Animal. ID">
                     </div>
 
                     <div class="form-group col-md-5">
@@ -98,7 +99,7 @@
           <div class="col-md-12">
             <div class="card">
 
-                  <form action="" method="POST">
+                  <form action="/admin/milkParlor/add_milking_queue/save" method="POST">
                     @csrf
                     <div class="card-body">
                       <div class="row">
@@ -118,8 +119,9 @@
                               
                                 <tr>
                                   <td>{{ $loop->iteration }}</td>
-                                  <td>{{  $item->animal_id }}</td>
-                                  <td><input type="number" class="form-control" style="text-align: center" id="milk_vol" name="milk_vol" value="{{ old('milk_vol') }}"></td>
+                                  {{-- <td>{{  $item->animal_id }}</td> --}}
+                                  <td><input type="text" class="form-control" style="text-align: center" id="ani_id[]" name="ani_id[]" value="{{ $item->animal_id }}" readonly></td>
+                                  <td><input type="number" step="0.01" class="form-control" style="text-align: center" id="cow[]" name="cow[]" value="{{ old('cow.'.($loop->iteration)-1) }}"></td>
                                   <td><a href="{{ url('admin/milkParlor/add_milking_queue/'.$item->id.'/delete') }}" type="button" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to Remove this Animal form the Milking Queue?')"> Remove</a></td>
                                 </tr>
 

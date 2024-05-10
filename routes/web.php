@@ -111,11 +111,12 @@ Route::group(['middleware' => 'admin'], function(){
 
 
     //Milking features in Admin
-
     Route::get('admin/milkParlor/add_milking_queue', [MilkingController::class, 'indexTempRec']);
     Route::post('admin/milkParlor/add_milking_queue', [MilkingController::class, 'storeTempRec']);
-    Route::get('admin/milkParlor/add_milking_queue/{id}/delete', [MilkingController::class, 'destroyTempRec']);
     Route::get('admin/milkParlor/add_milking_queue/reset', [MilkingController::class, 'destroyAllTempRec']);
+    Route::get('admin/milkParlor/add_milking_queue/{id}/delete', [MilkingController::class, 'destroyTempRec']);
+
+    Route::post('admin/milkParlor/add_milking_queue/save', [MilkingController::class, 'store']);
     
 
     //QR Scanner
