@@ -19,5 +19,12 @@
         <li>Edited On : <strong>{{ $dtStamp }}</strong></li>
     </ul>
 
+    <br>
+    <br>
+    <br>
+    <p>Thank you</p>
+    <p>DFMIS System</p>
+    <p><i>This is System generated Email. Please do not Reply.</i></p>
+
 </body>
 </html>

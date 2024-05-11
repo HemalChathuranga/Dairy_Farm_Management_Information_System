@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class MilkingModel extends Model
 {
@@ -24,6 +25,7 @@ class MilkingModel extends Model
         'eve_updated_date',
     ];
 
+    //Fetch current date Milking record if available
     static public function getTodayMilkingRec($animal_id, $todayDate){
 
         $return = self::WHERE('animal_id', $animal_id)
@@ -31,5 +33,36 @@ class MilkingModel extends Model
                         ->first();
 
         return $return;
+    }
+
+    static public function getRecByID($id){
+
+        return self::findOrFail($id);
+    }
+
+    //Fetch all the Milking records with filters
+    static public function getMilkingRecords(){
+
+        $return = self::SELECT('milkings.*');
+
+                        //Search Filters applied on Milkings Table
+                        if (!empty(Request::get('animal_id'))) {
+                            $return = $return->WHERE('animal_id','LIKE', '%'.Request::get('animal_id').'%');
+                        }
+
+                        if (!empty(Request::get('start_date'))) {
+                            $return = $return->WHERE('milking_date','>=', Request::get('start_date'));
+                        }
+
+                        if (!empty(Request::get('end_date'))) {
+                            $return = $return->WHERE('milking_date','<=', Request::get('end_date'));
+                        }
+                        
+        
+        $return = $return->ORDERBY('milking_date', 'desc')
+                            ->paginate(10);
+
+        return $return;
+
     }
 }

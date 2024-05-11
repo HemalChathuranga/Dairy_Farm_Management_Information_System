@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ChangeMilkVol;
 use App\Models\AnimalModel;
 use App\Models\MilkingModel;
 use Illuminate\Http\Request;
 use App\Models\MilkingTempModel;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class MilkingController extends Controller
 {
@@ -16,6 +18,12 @@ class MilkingController extends Controller
      */
     public function index()
     {
+
+        $data['fetchedRecord'] = MilkingModel::getMilkingRecords();
+
+        $data['headerTitle'] = 'Milking Info.';
+        
+        return view('milkParlor.list', $data);
 
     }
 
@@ -35,11 +43,8 @@ class MilkingController extends Controller
         $request->validate([
 
             'cow.*' => 'required',
-
         ], [
-
             'cow.*' => 'Please Input Milk Volume for :attribute',
-
         ]);
 
 
@@ -140,7 +145,138 @@ class MilkingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+
+            'mor_milk_vol' => 'required',
+
+        ]);
+
+        date_default_timezone_set('Asia/Colombo');
+        $todayDate = date('Y-m-d');
+
+        $record = MilkingModel::getRecByID($id);
+
+        //Assign current record for the comparison in the email
+        $recordOld = MilkingModel::getRecByID($id);
+
+        $oldMorVol = $record->morning_vol;
+        $oldEveVol = $record->evening_vol;
+
+        if (($oldMorVol != $request->mor_milk_vol) && ($oldEveVol != $request->eve_milk_vol)) {
+
+            $record->morning_vol = $request->mor_milk_vol;
+            $record->mor_updated_by = Auth::user()->emp_id;
+            $record->mor_updated_date = $todayDate;
+
+            $record->evening_vol = $request->eve_milk_vol;
+            $record->eve_updated_by = Auth::user()->emp_id;
+            $record->eve_updated_date = $todayDate;
+
+            $record->save();
+
+
+            // Email Functionality
+            $editedBy = Auth::user()->first_name . ' ' . Auth::user()->last_name . ' (' . Auth::user()->emp_id . ')';
+            $toEmail = 'dfmis.srilanka@gmail.com';
+            $ccEmail = Auth::user()->email;
+            $subject = 'Milking Details updated in DFMIS';
+
+            Mail::to($toEmail)
+                    ->cc($ccEmail)
+                    ->send(new ChangeMilkVol($subject, $editedBy, $recordOld, $record));
+            
+            //****************************** */
+
+
+            if (Auth::user()->role == 'Admin') {
+                return redirect('admin/milkParlor/milking_info')->with('success', 'Milking Info. Updated Succesfully');
+            }
+            elseif (Auth::user()->role == 'Manager') {
+                return redirect('manager/milkParlor/milking_info')->with('success', 'Milking Info. Updated Succesfully');
+            }
+            else {
+                return redirect('fieldStaff/milkParlor/milking_info')->with('success', 'Milking Info. Updated Succesfully');
+            }
+            
+        }
+        elseif (($oldMorVol != $request->mor_milk_vol) && ($oldEveVol == $request->eve_milk_vol)) {
+
+            $record->morning_vol = $request->mor_milk_vol;
+            $record->mor_updated_by = Auth::user()->emp_id;
+            $record->mor_updated_date = $todayDate;
+            
+            $record->save();
+
+            // Email Functionality
+            $editedBy = Auth::user()->first_name . ' ' . Auth::user()->last_name . ' (' . Auth::user()->emp_id . ')';
+            $toEmail = 'dfmis.srilanka@gmail.com';
+            $ccEmail = Auth::user()->email;
+            $subject = 'Milking Details updated in DFMIS';
+
+            Mail::to($toEmail)
+                    ->cc($ccEmail)
+                    ->send(new ChangeMilkVol($subject, $editedBy, $recordOld, $record));
+            
+            //****************************** */
+
+
+            if (Auth::user()->role == 'Admin') {
+                return redirect('admin/milkParlor/milking_info')->with('success', 'Milking Info. Updated Succesfully');
+            }
+            elseif (Auth::user()->role == 'Manager') {
+                return redirect('manager/milkParlor/milking_info')->with('success', 'Milking Info. Updated Succesfully');
+            }
+            else {
+                return redirect('fieldStaff/milkParlor/milking_info')->with('success', 'Milking Info. Updated Succesfully');
+            }
+
+        }
+        elseif (($oldMorVol == $request->mor_milk_vol) && ($oldEveVol != $request->eve_milk_vol)) {
+
+            $record->evening_vol = $request->eve_milk_vol;
+            $record->eve_updated_by = Auth::user()->emp_id;
+            $record->eve_updated_date = $todayDate;
+
+            $record->save();
+
+            // Email Functionality
+            $editedBy = Auth::user()->first_name . ' ' . Auth::user()->last_name . ' (' . Auth::user()->emp_id . ')';
+            $toEmail = 'dfmis.srilanka@gmail.com';
+            $ccEmail = Auth::user()->email;
+            $subject = 'Milking Details updated in DFMIS';
+
+            Mail::to($toEmail)
+                    ->cc($ccEmail)
+                    ->send(new ChangeMilkVol($subject, $editedBy, $recordOld, $record));
+            
+            //****************************** */
+            
+
+            if (Auth::user()->role == 'Admin') {
+                return redirect('admin/milkParlor/milking_info')->with('success', 'Milking Info. Updated Succesfully');
+            }
+            elseif (Auth::user()->role == 'Manager') {
+                return redirect('manager/milkParlor/milking_info')->with('success', 'Milking Info. Updated Succesfully');
+            }
+            else {
+                return redirect('fieldStaff/milkParlor/milking_info')->with('success', 'Milking Info. Updated Succesfully');
+            }
+            
+        }
+        else {
+
+            if (Auth::user()->role == 'Admin') {
+                return redirect('admin/milkParlor/milking_info')->with('info', 'No any Changes to update');
+            }
+            elseif (Auth::user()->role == 'Manager') {
+                return redirect('manager/milkParlor/milking_info')->with('info', 'No any Changes to update');
+            }
+            else {
+                return redirect('fieldStaff/milkParlor/milking_info')->with('info', 'No any Changes to update');
+            }
+
+        }
+
     }
 
     /**
@@ -148,6 +284,12 @@ class MilkingController extends Controller
      */
     public function destroy(string $id)
     {
+
+        $record = MilkingModel::getRecByID($id);
+
+        $record->delete();
+
+        return redirect('admin/milkParlor/milking_info')->with('success', 'Milking Record has been Deleted');
 
     }
     
@@ -161,7 +303,14 @@ class MilkingController extends Controller
         $data['fetchedRecord'] = MilkingTempModel::all();
 
         $data['headerTitle'] = 'Milking Queue';
-        return view('milkParlor.add_milking_queue', $data);
+        
+        if (Auth::user()->role == 'Admin') {
+            return view('milkParlor.admin.add_milking_queue', $data);
+        }
+        else {
+            return view('milkParlor.fieldStaff.add_milking_queue', $data);
+        }
+        
     }
 
     //Add Animal ID from the QR read
@@ -169,7 +318,12 @@ class MilkingController extends Controller
 
         $fromQR = trim($request->animal_id);
 
-        return redirect('admin/milkParlor/add_milking_queue')->with('qrValue', $fromQR);
+        if (Auth::user()->role == 'Admin') {
+            return redirect('admin/milkParlor/add_milking_queue')->with('qrValue', $fromQR);
+        }
+        else {
+            return redirect('fieldStaff/milkParlor/add_milking_queue')->with('qrValue', $fromQR);
+        }
 
     }
     

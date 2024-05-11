@@ -142,7 +142,7 @@
                   <li class="nav-item">
                     <a href="{{ url('admin/milkParlor/milking_info') }}" class="nav-link @if(Request::segment(3) == 'milking_info') ? active @endif">
                       <i class="nav-icon fas"></i>
-                      <i class="nav-icon fas fa-cow"></i>
+                      <i class="nav-icon fas fa-list"></i>
                       <p>
                         Milking Info.
                       </p>
@@ -247,6 +247,27 @@
                     Animal Info.
                   </p>
                 </a>
+              </li>
+
+              <li class="nav-item @if(Request::segment(2) == 'milkParlor') ? menu-open @endif">
+                <a href="" class="nav-link @if(Request::segment(2) == 'milkParlor') ? active @endif">
+                  <i class="nav-icon fas fa-cow"></i>
+                  <p>
+                    Milk Parlor
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ url('manager/milkParlor/milking_info') }}" class="nav-link @if(Request::segment(3) == 'milking_info') ? active @endif">
+                      <i class="nav-icon fas"></i>
+                      <i class="nav-icon fas fa-list"></i>
+                      <p>
+                        Milking Info.
+                      </p>
+                    </a>
+                  </li>
+                </ul> 
               </li>
 
               <li class="nav-item">
@@ -368,6 +389,37 @@
                   </p>
                 </a>
               </li>
+
+              <li class="nav-item @if(Request::segment(2) == 'milkParlor') ? menu-open @endif">
+                <a href="" class="nav-link @if(Request::segment(2) == 'milkParlor') ? active @endif">
+                  <i class="nav-icon fas fa-cow"></i>
+                  <p>
+                    Milk Parlor
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ url('fieldStaff/milkParlor/add_milking_queue') }}" class="nav-link @if(Request::segment(3) == 'add_milking_queue') ? active @endif">
+                      <i class="nav-icon fas"></i>
+                      <i class="nav-icon fas fa-cow"></i>
+                      <p>
+                        Daily Milking
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ url('fieldStaff/milkParlor/milking_info') }}" class="nav-link @if(Request::segment(3) == 'milking_info') ? active @endif">
+                      <i class="nav-icon fas"></i>
+                      <i class="nav-icon fas fa-list"></i>
+                      <p>
+                        Milking Info.
+                      </p>
+                    </a>
+                  </li>
+                </ul> 
+              </li>
+
 
               <li class="nav-item">
                 <a href="{{ url('profile') }}" class="nav-link @if(Request::segment(1) == 'profile') ? active @endif">

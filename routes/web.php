@@ -121,13 +121,16 @@ Route::group(['middleware' => 'admin'], function(){
 
     //QR Scanner
     Route::get('admin/milkParlor/qr-scanner', function () {
-        return view('milkParlor.qr-scanner');
+        return view('milkParlor.admin.qr-scanner');
     });
 
     Route::post('admin/milkParlor/qr-scanner', [MilkingController::class, 'addQRData']);
 
     
-    
+    //Milking Info.
+    Route::get('admin/milkParlor/milking_info', [MilkingController::class, 'index']);
+    Route::post('admin/milkParlor/milking_info/{id}/save', [MilkingController::class, 'update']);
+    Route::get('admin/milkParlor/milking_info/{id}/delete', [MilkingController::class, 'destroy']); //This Delete part only added to the Admin
     
 
 });
@@ -184,6 +187,11 @@ Route::group(['middleware' => 'manager'], function(){
     Route::post('manager/animal/animalMgt/{id}/edit', [AnimalController::class, 'update']);
     Route::get('manager/animal/animalMgt/{id}/delete', [AnimalController::class, 'destroy']);
 
+
+    //Milking Info. in Manager
+    Route::get('manager/milkParlor/milking_info', [MilkingController::class, 'index']);
+    Route::post('manager/milkParlor/milking_info/{id}/save', [MilkingController::class, 'update']);
+
     
     
 });
@@ -226,6 +234,28 @@ Route::group(['middleware' => 'medicalStaff'], function(){
 // <--- Field Staff  Middleware Group -->
 Route::group(['middleware' => 'fieldStaff'], function(){
     Route::get('fieldStaff/dashboard', [DashboardController::class, 'index']);
+
+
+
+    //Milking features in Field Staff
+    Route::get('fieldStaff/milkParlor/add_milking_queue', [MilkingController::class, 'indexTempRec']);
+    Route::post('fieldStaff/milkParlor/add_milking_queue', [MilkingController::class, 'storeTempRec']);
+    Route::get('fieldStaff/milkParlor/add_milking_queue/reset', [MilkingController::class, 'destroyAllTempRec']);
+    Route::get('fieldStaff/milkParlor/add_milking_queue/{id}/delete', [MilkingController::class, 'destroyTempRec']);
+
+    Route::post('fieldStaff/milkParlor/add_milking_queue/save', [MilkingController::class, 'store']);
+    
+
+    //QR Scanner
+    Route::get('fieldStaff/milkParlor/qr-scanner', function () {
+        return view('milkParlor.fieldStaff.qr-scanner');
+    });
+
+    Route::post('fieldStaff/milkParlor/qr-scanner', [MilkingController::class, 'addQRData']);
+
+
+    //Milking Info. in Field Staff
+    Route::get('fieldStaff/milkParlor/milking_info', [MilkingController::class, 'index']);
 
 
     
