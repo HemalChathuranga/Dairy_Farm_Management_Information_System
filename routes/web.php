@@ -11,6 +11,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FieldStaffController;
 use App\Http\Controllers\OfficeStaffController;
 use App\Http\Controllers\StoresStaffController;
+use App\Http\Controllers\VaccinationController;
 use App\Http\Controllers\MedicalStaffController;
 
 /*
@@ -115,23 +116,41 @@ Route::group(['middleware' => 'admin'], function(){
     Route::post('admin/milkParlor/add_milking_queue', [MilkingController::class, 'storeTempRec']);
     Route::get('admin/milkParlor/add_milking_queue/reset', [MilkingController::class, 'destroyAllTempRec']);
     Route::get('admin/milkParlor/add_milking_queue/{id}/delete', [MilkingController::class, 'destroyTempRec']);
-
     Route::post('admin/milkParlor/add_milking_queue/save', [MilkingController::class, 'store']);
-    
+    Route::post('admin/milkParlor/qr-scanner', [MilkingController::class, 'addQRData']);
 
     //QR Scanner
     Route::get('admin/milkParlor/qr-scanner', function () {
         return view('milkParlor.admin.qr-scanner');
     });
-
-    Route::post('admin/milkParlor/qr-scanner', [MilkingController::class, 'addQRData']);
-
     
+
     //Milking Info.
     Route::get('admin/milkParlor/milking_info', [MilkingController::class, 'index']);
     Route::post('admin/milkParlor/milking_info/{id}/save', [MilkingController::class, 'update']);
     Route::get('admin/milkParlor/milking_info/{id}/delete', [MilkingController::class, 'destroy']); //This Delete part only added to the Admin
     
+
+
+    //Animal Health Tab
+    //Vaccine feature
+    Route::get('admin/ani_health/vaccin_monitor', [VaccinationController::class, 'indexDueRec']);
+    Route::get('admin/ani_health/vaccin_monitor/add', [VaccinationController::class, 'create']);
+    Route::post('admin/ani_health/vaccin_monitor/add', [VaccinationController::class, 'createTempRec']);
+    Route::post('admin/ani_health/vaccin_monitor/add/save', [VaccinationController::class, 'store']);
+    Route::get('admin/ani_health/vaccin_monitor/{id}/edit', [VaccinationController::class, 'edit']);
+    Route::post('admin/ani_health/vaccin_monitor/{id}/edit', [VaccinationController::class, 'update']);
+    Route::get('admin/ani_health/vaccin_monitor/full_list', [VaccinationController::class, 'indexFull']);
+
+    //QR Scanner
+    Route::get('admin/ani_health/vaccin_monitor/qr-scanner', function () {
+        return view('animal.animalHealth.vaccination.qr-scanner');
+    });
+
+
+
+
+
 
 });
 
@@ -222,6 +241,22 @@ Route::group(['middleware' => 'officeStaff'], function(){
 // <--- Medical Staff Middleware Group -->
 Route::group(['middleware' => 'medicalStaff'], function(){
     Route::get('medicalStaff/dashboard', [DashboardController::class, 'index']);
+
+
+    //Animal Health Tab
+    //Vaccine feature
+    Route::get('medicalStaff/ani_health/vaccin_monitor', [VaccinationController::class, 'indexDueRec']);
+    Route::get('medicalStaff/ani_health/vaccin_monitor/add', [VaccinationController::class, 'create']);
+    Route::post('medicalStaff/ani_health/vaccin_monitor/add', [VaccinationController::class, 'createTempRec']);
+    Route::post('medicalStaff/ani_health/vaccin_monitor/add/save', [VaccinationController::class, 'store']);
+    Route::get('medicalStaff/ani_health/vaccin_monitor/{id}/edit', [VaccinationController::class, 'edit']);
+    Route::post('medicalStaff/ani_health/vaccin_monitor/{id}/edit', [VaccinationController::class, 'update']);
+    Route::get('medicalStaff/ani_health/vaccin_monitor/full_list', [VaccinationController::class, 'indexFull']);
+
+    //QR Scanner
+    Route::get('medicalStaff/ani_health/vaccin_monitor/qr-scanner', function () {
+        return view('animal.animalHealth.vaccination.qr-scanner');
+    });
 
 
     

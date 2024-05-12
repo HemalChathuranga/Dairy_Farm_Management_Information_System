@@ -354,9 +354,8 @@ class MilkingController extends Controller
 
         $fetchTodayMilkingRec = MilkingModel::getTodayMilkingRec($request->animal_id, $todayDate);
 
-
         //Check if the selected cow is fit for Milking
-        if ($fetchAnimalRec->milking_status == 'Milking') {
+        if (($fetchAnimalRec->milking_status == 'Milking') && ($fetchAnimalRec->status == 'Active')) {
 
             //Checkings for adding a cow to Morning queue
             if ($timeStamp == 'AM') {
@@ -431,6 +430,16 @@ class MilkingController extends Controller
 
                 }
 
+            }
+
+        }
+        elseif ($fetchAnimalRec->status == 'Inactive'){
+
+            if (Auth::user()->role == 'Admin') {
+                return redirect('admin/milkParlor/add_milking_queue')->with('error', 'Selected Animal not in Active Status');
+            }
+            else {
+                return redirect('fieldStaff/milkParlor/add_milking_queue')->with('error', 'Selected Animal not in Active Status');
             }
 
         }

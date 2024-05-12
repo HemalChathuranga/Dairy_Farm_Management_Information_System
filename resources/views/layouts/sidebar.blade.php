@@ -149,10 +149,47 @@
                     </a>
                   </li>
                 </ul> 
-              </li>   
+              </li>
 
 
-
+              <li class="nav-item @if(Request::segment(2) == 'ani_health') ? menu-open @endif">
+                <a href="" class="nav-link @if(Request::segment(2) == 'ani_health') ? active @endif">
+                  <i class="nav-icon fas fa-house-medical"></i>
+                  <p>
+                    Animal Health
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ url('admin/ani_health/vaccin_monitor') }}" class="nav-link @if(Request::segment(3) == 'vaccin_monitor') ? active @endif">
+                      <i class="nav-icon fas"></i>
+                      <i class="nav-icon fas fa-syringe"></i>
+                      <p>
+                        Vaccination Monitor
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ url('admin/ani_health/preg_monitor') }}" class="nav-link @if(Request::segment(3) == 'preg_monitor') ? active @endif">
+                      <i class="nav-icon fas"></i>
+                      <i class="nav-icon fas fa-hand-holding-heart"></i>
+                      <p>
+                        Pregnancy Monitor
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ url('admin/ani_health/health_rec') }}" class="nav-link @if(Request::segment(3) == 'health_rec') ? active @endif">
+                      <i class="nav-icon fas"></i>
+                      <i class="nav-icon fas fa-file-medical"></i>
+                      <p>
+                        Health Records
+                      </p>
+                    </a>
+                  </li>
+                </ul> 
+              </li>
 
               <li class="nav-item">
                 <a href="{{ url('profile') }}" class="nav-link @if(Request::segment(1) == 'profile') ? active @endif">
@@ -287,6 +324,8 @@
                 </a>
               </li>
 
+
+
           <!-- Office Staff Sidebar Menu -->
           @elseif (Auth::user()->role == 'Office Staff')
               <li class="nav-item">
@@ -333,6 +372,8 @@
                 </a>
               </li>
 
+
+
           <!-- Medical Staff Sidebar Menu -->
           @elseif (Auth::user()->role == 'Medical Staff')
               <li class="nav-item">
@@ -353,6 +394,45 @@
                 </a>
               </li>
 
+              <li class="nav-item @if(Request::segment(2) == 'ani_health') ? menu-open @endif">
+                <a href="" class="nav-link @if(Request::segment(2) == 'ani_health') ? active @endif">
+                  <i class="nav-icon fas fa-house-medical"></i>
+                  <p>
+                    Animal Health
+                    <i class="right fas fa-angle-left"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview">
+                  <li class="nav-item">
+                    <a href="{{ url('medicalStaff/ani_health/vaccin_monitor') }}" class="nav-link @if(Request::segment(3) == 'vaccin_monitor') ? active @endif">
+                      <i class="nav-icon fas"></i>
+                      <i class="nav-icon fas fa-syringe"></i>
+                      <p>
+                        Vaccination Monitor
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ url('medicalStaff/ani_health/preg_monitor') }}" class="nav-link @if(Request::segment(3) == 'preg_monitor') ? active @endif">
+                      <i class="nav-icon fas"></i>
+                      <i class="nav-icon fas fa-hand-holding-heart"></i>
+                      <p>
+                        Pregnancy Monitor
+                      </p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ url('medicalStaff/ani_health/health_rec') }}" class="nav-link @if(Request::segment(3) == 'health_rec') ? active @endif">
+                      <i class="nav-icon fas"></i>
+                      <i class="nav-icon fas fa-file-medical"></i>
+                      <p>
+                        Health Records
+                      </p>
+                    </a>
+                  </li>
+                </ul> 
+              </li>
+
               <li class="nav-item">
                 <a href="{{ url('profile') }}" class="nav-link @if(Request::segment(1) == 'profile') ? active @endif">
                   <i class="nav-icon fas fa-address-card"></i>
@@ -369,6 +449,8 @@
                   </p>
                 </a>
               </li>
+
+
 
           <!-- Field Staff Sidebar Menu -->
           @elseif (Auth::user()->role == 'Field Staff')

@@ -122,7 +122,6 @@ class AnimalModel extends Model
 
         $return = self::WHERE('animal_id', $animal_id)->first();
 
-        // dd($return);
         return $return;
     }
 

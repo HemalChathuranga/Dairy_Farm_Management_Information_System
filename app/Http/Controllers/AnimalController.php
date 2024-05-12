@@ -192,8 +192,6 @@ class AnimalController extends Controller
             'father_id' => 'nullable|string',
             'mother_id' => 'nullable|string',
             'status' => 'required|string',
-            // 'pregnancy_occ' => 'nullable|integer',
-            // 'next_pregnancy_appox_date' => 'nullable|date',
 
         ]);
 
