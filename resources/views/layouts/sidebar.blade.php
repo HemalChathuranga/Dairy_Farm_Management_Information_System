@@ -180,7 +180,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('admin/ani_health/health_rec') }}" class="nav-link @if(Request::segment(3) == 'health_rec') ? active @endif">
+                    <a href="{{ url('admin/ani_health/treatment') }}" class="nav-link @if(Request::segment(3) == 'treatment') ? active @endif">
                       <i class="nav-icon fas"></i>
                       <i class="nav-icon fas fa-file-medical"></i>
                       <p>
@@ -422,7 +422,7 @@
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="{{ url('medicalStaff/ani_health/health_rec') }}" class="nav-link @if(Request::segment(3) == 'health_rec') ? active @endif">
+                    <a href="{{ url('medicalStaff/ani_health/treatment') }}" class="nav-link @if(Request::segment(3) == 'treatment') ? active @endif">
                       <i class="nav-icon fas"></i>
                       <i class="nav-icon fas fa-file-medical"></i>
                       <p>

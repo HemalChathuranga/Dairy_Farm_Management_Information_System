@@ -125,7 +125,7 @@
                       <div class="row">
                         <div class="form-group col-md-12">
                           <label for="notes">Notes</label>
-                          <textarea class="form-control" name="notes" id="notes" rows="4" value="{{ old('notes', $fetchedRecord->notes) }}" placeholder="Enter Notes"></textarea>
+                          <textarea class="form-control" name="notes" id="notes" rows="4" value="{{ old('notes', $fetchedRecord->notes) }}" placeholder="Enter Notes">{{ $fetchedRecord->notes }}</textarea>
                         </div>
                       </div>
     

@@ -9,6 +9,7 @@ use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MilkingController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PregnancyController;
+use App\Http\Controllers\TreatmentController;
 use App\Http\Controllers\FieldStaffController;
 use App\Http\Controllers\OfficeStaffController;
 use App\Http\Controllers\StoresStaffController;
@@ -165,7 +166,24 @@ Route::group(['middleware' => 'admin'], function(){
     });
 
 
+    //Animal Health Tab
+    //Treatment feature
+    Route::get('admin/ani_health/treatment', [TreatmentController::class, 'indexPendingRec']);
+    Route::get('admin/ani_health/treatment/add', [TreatmentController::class, 'create']);
+    Route::post('admin/ani_health/treatment/add', [TreatmentController::class, 'createTempRec']);
+    Route::post('admin/ani_health/treatment/add/save', [TreatmentController::class, 'store']);
+    Route::get('admin/ani_health/treatment/{id}/edit', [TreatmentController::class, 'edit']);
+    Route::post('admin/ani_health/treatment/{id}/edit', [TreatmentController::class, 'update']);
+    Route::get('admin/ani_health/treatment/full_list', [TreatmentController::class, 'indexFull']);
+    Route::get('admin/ani_health/treatment/{id}/view', [TreatmentController::class, 'show']);
 
+    // //QR Scanner
+    Route::get('admin/ani_health/treatment/qr-scanner', function () {
+        return view('animal.animalHealth.treatment.qr-scanner');
+    });
+
+
+    
 
 });
 
@@ -288,6 +306,25 @@ Route::group(['middleware' => 'medicalStaff'], function(){
     Route::get('medicalStaff/ani_health/preg_monitor/qr-scanner', function () {
         return view('animal.animalHealth.pregnancy.qr-scanner');
     });
+
+
+    //Animal Health Tab
+    //Treatment feature
+    Route::get('medicalStaff/ani_health/treatment', [TreatmentController::class, 'indexPendingRec']);
+    Route::get('medicalStaff/ani_health/treatment/add', [TreatmentController::class, 'create']);
+    Route::post('medicalStaff/ani_health/treatment/add', [TreatmentController::class, 'createTempRec']);
+    Route::post('medicalStaff/ani_health/treatment/add/save', [TreatmentController::class, 'store']);
+    Route::get('medicalStaff/ani_health/treatment/{id}/edit', [TreatmentController::class, 'edit']);
+    Route::post('medicalStaff/ani_health/treatment/{id}/edit', [TreatmentController::class, 'update']);
+    Route::get('medicalStaff/ani_health/treatment/full_list', [TreatmentController::class, 'indexFull']);
+    Route::get('medicalStaff/ani_health/treatment/{id}/view', [TreatmentController::class, 'show']);
+
+    // //QR Scanner
+    Route::get('medicalStaff/ani_health/treatment/qr-scanner', function () {
+        return view('animal.animalHealth.treatment.qr-scanner');
+    });
+    
+
     
     
 });
