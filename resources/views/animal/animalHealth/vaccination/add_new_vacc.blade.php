@@ -46,7 +46,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Queue Details</h3>
+                <h3 class="card-title">Animal Details</h3>
                 <div>
                   <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : 'medicalStaff').'/ani_health/vaccin_monitor') }}" class="btn btn-primary float-end"><i class="fas fa-backward"></i> Back</a>
                 </div>
@@ -63,7 +63,7 @@
 
                     <div class="form-group col-md-5">
                       <button type="submit" class="btn btn-success" style="margin-top: 32px">New Vaccine Record</button>
-                      <a href="{{ url('admin/ani_health/vaccin_monitor/qr-scanner') }}" type="button" class="btn btn-primary" style="margin-top: 32px">Scan Ear Tag</a>
+                      <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : 'medicalStaff').'/ani_health/vaccin_monitor/qr-scanner') }}" type="button" class="btn btn-primary" style="margin-top: 32px">Scan Ear Tag</a>
                       <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : 'medicalStaff').'/ani_health/vaccin_monitor/add') }}" class="btn btn-warning" style="margin-top: 32px">Reset</a>
                     </div>
                   </div>

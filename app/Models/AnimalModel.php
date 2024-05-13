@@ -37,20 +37,7 @@ class AnimalModel extends Model
     //     'qr_code'
     // ];
 
-    // protected $appends = [
-    //     'age'
-    // ];
 
-    // public function getAgeAttribute(){
-
-    //     $bday = new DateTime($this->birth_date);
-    //     $today = new DateTime(date('m.d.y'));
-
-    //     $diff = $today->diff($bday);
-    //     $diffY = $diff->y;
-
-    //     return "10";
-    // }
 
     public function getAgeAttribute(){
 

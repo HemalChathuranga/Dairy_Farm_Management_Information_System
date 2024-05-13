@@ -62,27 +62,39 @@ class VaccinationController extends Controller
         //Fetching Animal details of the cow to check the active status
         $fetchAnimalRec = AnimalModel::getRecByAniID($request->animal_id);
 
-        if ($fetchAnimalRec->status == 'Active') {
+        if (!empty($fetchAnimalRec)) {
             
-            $data['fetchedRecord'] = $fetchAnimalRec->animal_id;
-
-            $data['headerTitle'] = 'Add New Vaccine Record';
-
-            return view('animal.animalHealth.vaccination.add_new_vacc', $data);
+            if ($fetchAnimalRec->status == 'Active') {
+            
+                $data['fetchedRecord'] = $fetchAnimalRec->animal_id;
+    
+                $data['headerTitle'] = 'Add New Vaccine Record';
+    
+                return view('animal.animalHealth.vaccination.add_new_vacc', $data);
+    
+            }
+            else {
+    
+                if (Auth::user()->role == 'Admin') {
+                    return redirect('admin/ani_health/vaccin_monitor/add')->with('error', 'Selected Animal not in Active Status');
+                }
+                else {
+                    return redirect('medicalStaff/ani_health/vaccin_monitor/add')->with('error', 'Selected Animal not in Active Status');
+                }
+                
+            }
 
         }
         else {
-
             if (Auth::user()->role == 'Admin') {
-                return redirect('admin/ani_health/vaccin_monitor/add')->with('error', 'Selected Animal not in Active Status');
+                return redirect('admin/ani_health/vaccin_monitor/add')->with('error', 'Selected Animal ID is Invalid');
             }
             else {
-                return redirect('medicalStaff/ani_health/vaccin_monitor/add')->with('error', 'Selected Animal not in Active Status');
+                return redirect('medicalStaff/ani_health/vaccin_monitor/add')->with('error', 'Selected Animal ID is Invalid');
             }
-            
+
         }
 
-    
     }
 
 

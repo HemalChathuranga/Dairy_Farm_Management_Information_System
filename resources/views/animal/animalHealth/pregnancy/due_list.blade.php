@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1><i class="nav-icon fas fa-syringe"></i> Vaccination Due List</h1>
+            <h1><i class="nav-icon fas fa-hand-holding-heart"></i> Delivery Due List</h1>
           </div>
           <div class="col-sm-6">
             @include('message')
@@ -24,7 +24,7 @@
           <div class="col-md-12">
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Search Animal</h3>
+                <h3 class="card-title">Search Records</h3>
               </div>
               <form action="" method="get">
                 <div class="card-body">
@@ -43,7 +43,7 @@
                     </div>
                     <div class="form-group col-md-3">
                       <button type="submit" class="btn btn-success" style="margin-top: 32px">Search</button>
-                      <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : 'medicalStaff').'/ani_health/vaccin_monitor') }}" class="btn btn-warning" style="margin-top: 32px">Reset</a>
+                      <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : 'medicalStaff').'/ani_health/preg_monitor') }}" class="btn btn-warning" style="margin-top: 32px">Reset</a>
                     </div>
                   </div>
                 </div>
@@ -68,10 +68,10 @@
                   <div class="input-group input-group-sm" style="align-items: center; width: 300px">
                     <div class="row">
                       <div class="col-md-6">
-                      <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : 'medicalStaff').'/ani_health/vaccin_monitor/add') }}" class="btn btn-primary"><i class="fas fa-plus"></i> New Vaccination</a>
+                      <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : 'medicalStaff').'/ani_health/preg_monitor/add') }}" class="btn btn-primary"><i class="fas fa-plus"></i> New Pregnancy</a>
                       </div>
                       <div class="col-md-6">
-                      <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : 'medicalStaff').'/ani_health/vaccin_monitor/full_list') }}" class="btn btn-secondary"><i class="fas fa-list-ul"></i> Full Vaccination List</a>
+                      <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : 'medicalStaff').'/ani_health/preg_monitor/full_list') }}" class="btn btn-secondary"><i class="fas fa-list-ul"></i> Full Pregnancy List</a>
                       </div>
                     </div>
                   </div>
@@ -84,7 +84,8 @@
                     <tr>
                       <th>#</th>
                       <th>Animal ID</th>
-                      <th>Vaccine Name</th>
+                      <th>Pregnancy Date</th>
+                      <th>Pregnancy Occ.</th>
                       <th>Due Date</th>
                       <th>Action</th>
                     </tr>
@@ -94,11 +95,12 @@
                       <tr>
                         <td>{{ ($fetchedRecord->currentPage() == 1) ? $loop->iteration : ($loop->iteration + 10) }}</td>
                         <td>{{ $item->animal_id }}</td>
-                        <td>{{ $item->next_vac_name }}</td>
+                        <td>{{ $item->preg_date }}</td>
+                        <td>{{ $item->pregnancy_occ }}</td>
 
-                        <td>{{ $item->next_vac_date }}  
+                        <td>{{ $item->estimated_delivery_date }}  
                           @php
-                            $dueDate = strtotime($item->next_vac_date);
+                            $dueDate = strtotime($item->estimated_delivery_date);
                             $today = strtotime(date('Y-m-d'));
                             $diff = floor(($dueDate - $today) / (60 * 60 * 24));
 
@@ -107,9 +109,8 @@
                             }
                           @endphp
                         </td>
-
                         <td>
-                          <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : 'medicalStaff').'/ani_health/vaccin_monitor/'.$item->id.'/edit') }}" type="button" class="btn btn-outline-success btn-sm">Vaccinate</i></a>
+                          <a href="{{ url(((Auth::user()->role == 'Admin') ? 'admin' : 'medicalStaff').'/ani_health/preg_monitor/'.$item->id.'/edit') }}" type="button" class="btn btn-outline-success btn-sm">Mark Delivery</a>
                         </td>
                       </tr>                      
                     @endforeach

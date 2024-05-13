@@ -341,10 +341,9 @@ class AnimalController extends Controller
         $data['aniID'] = $request->animal_id;
 
         $data['fetchedRecord'] = AnimalModel::getRecByAniID($request->animal_id);
-
+    
         $data['headerTitle'] = 'Animal Info.';
         return view('animal.animalInfo.view', $data);
+
     }
-
-
 }

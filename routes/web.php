@@ -8,6 +8,7 @@ use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\MilkingController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PregnancyController;
 use App\Http\Controllers\FieldStaffController;
 use App\Http\Controllers\OfficeStaffController;
 use App\Http\Controllers\StoresStaffController;
@@ -148,6 +149,20 @@ Route::group(['middleware' => 'admin'], function(){
     });
 
 
+    //Animal Health Tab
+    //Pregnancy feature
+    Route::get('admin/ani_health/preg_monitor', [PregnancyController::class, 'indexDueRec']);
+    Route::get('admin/ani_health/preg_monitor/add', [PregnancyController::class, 'create']);
+    Route::post('admin/ani_health/preg_monitor/add', [PregnancyController::class, 'createTempRec']);
+    Route::post('admin/ani_health/preg_monitor/add/save', [PregnancyController::class, 'store']);
+    Route::get('admin/ani_health/preg_monitor/{id}/edit', [PregnancyController::class, 'edit']);
+    Route::post('admin/ani_health/preg_monitor/{id}/edit', [PregnancyController::class, 'update']);
+    Route::get('admin/ani_health/preg_monitor/full_list', [PregnancyController::class, 'indexFull']);
+
+    //QR Scanner
+    Route::get('admin/ani_health/preg_monitor/qr-scanner', function () {
+        return view('animal.animalHealth.pregnancy.qr-scanner');
+    });
 
 
 
@@ -259,6 +274,20 @@ Route::group(['middleware' => 'medicalStaff'], function(){
     });
 
 
+    //Animal Health Tab
+    //Pregnancy feature
+    Route::get('medicalStaff/ani_health/preg_monitor', [PregnancyController::class, 'indexDueRec']);
+    Route::get('medicalStaff/ani_health/preg_monitor/add', [PregnancyController::class, 'create']);
+    Route::post('medicalStaff/ani_health/preg_monitor/add', [PregnancyController::class, 'createTempRec']);
+    Route::post('medicalStaff/ani_health/preg_monitor/add/save', [PregnancyController::class, 'store']);
+    Route::get('medicalStaff/ani_health/preg_monitor/{id}/edit', [PregnancyController::class, 'edit']);
+    Route::post('medicalStaff/ani_health/preg_monitor/{id}/edit', [PregnancyController::class, 'update']);
+    Route::get('medicalStaff/ani_health/preg_monitor/full_list', [PregnancyController::class, 'indexFull']);
+
+    //QR Scanner
+    Route::get('medicalStaff/ani_health/preg_monitor/qr-scanner', function () {
+        return view('animal.animalHealth.pregnancy.qr-scanner');
+    });
     
     
 });
