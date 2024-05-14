@@ -226,4 +226,16 @@ class User extends Authenticatable
 
         return self::findOrFail($id);
     }
+
+    //Fetch User records by role
+    static public function getUserRec($role){
+
+        $return = self::SELECT('users.*')
+                        ->WHERE('status','=','Active')
+                        ->WHERE('users.role','=',$role);
+
+        $return = $return->count();
+
+        return $return;
+    }
 }

@@ -112,4 +112,88 @@ class AnimalModel extends Model
         return $return;
     }
 
+
+    static public function getFullAnimalCount(){
+
+        $return = self::SELECT('animals.*')
+                        ->WHERE('status','=','Active');
+
+        $return = $return->count();
+
+        return $return;
+    }
+
+    static public function getAnimalCount($gender){
+
+        $return = self::SELECT('animals.*')
+                        ->WHERE('status','=','Active')
+                        ->WHERE('gender','=',$gender);
+
+        $return = $return->count();
+
+        return $return;
+    }
+
+
+    static public function getMilkingAnimalCount(){
+
+        $return = self::SELECT('animals.*')
+                        ->WHERE('status','=','Active')
+                        ->WHERE('gender','=','Female')
+                        ->WHERE('milking_status','=','Milking');
+
+        $return = $return->count();
+
+        return $return;
+    }
+
+    static public function getStallCount(){
+
+        $return = self::SELECT('stall_number')
+                        ->distinct()
+                        ->get()
+                        ->count();
+                        
+        return $return;
+    }
+
+    static public function getNonMilkingAnimalCount(){
+
+        $return = self::SELECT('animals.*')
+                        ->WHERE('status','=','Active')
+                        ->WHERE('gender','=','Female')
+                        ->WHERE('milking_status','=','Non-Milking');
+
+        $return = $return->count();
+
+        return $return;
+
+    }
+
+    
+    static public function getPregAnimalCount(){
+
+        $return = self::SELECT('animals.*')
+                        ->WHERE('status','=','Active')
+                        ->WHERE('gender','=','Female')
+                        ->WHERE('pregnant_status','=','Yes');
+
+        $return = $return->count();
+
+        return $return;
+
+    }
+
+    
+    static public function getNewBirhtCount($firstDayofWeek){
+
+        $return = self::SELECT('animals.animal_id')
+                        ->WHERE('status','=','Active')
+                        ->WHERE('birth_date','>=',$firstDayofWeek);
+
+        $return = $return->count();
+
+        return $return;
+    }
+
 }

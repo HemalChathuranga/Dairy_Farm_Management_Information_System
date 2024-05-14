@@ -65,4 +65,50 @@ class MilkingModel extends Model
         return $return;
 
     }
+
+
+    //Dashboard Information feeders
+    
+
+    static public function getMorMilkVol($startDate){
+
+        $return = self::SELECT('morning_vol')
+                        ->WHERE('milking_date','>=', $startDate)
+                        ->get()
+                        ->sum('morning_vol');
+                        
+        return $return;
+    }
+
+    static public function getEveMilkVol($startDate){
+
+        $return = self::SELECT('evening_vol')
+                        ->WHERE('milking_date','>=', $startDate)
+                        ->get()
+                        ->sum('evening_vol');
+                        
+        return $return;
+    }
+
+
+    static public function getMorMilkVolforDay($date){
+
+        $return = self::SELECT('morning_vol')
+                        ->WHERE('milking_date','=', $date)
+                        ->get()
+                        ->sum('morning_vol');
+                        
+        return $return;
+    }
+
+    static public function getEveMilkVolforDay($date){
+
+        $return = self::SELECT('evening_vol')
+                        ->WHERE('milking_date','=', $date)
+                        ->get()
+                        ->sum('evening_vol');
+                        
+        return $return;
+    }
+
 }

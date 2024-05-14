@@ -95,5 +95,18 @@ class TreatmentModel extends Model
 
     }
 
+    
+
+    static public function getPendingTreatCount(){
+
+        $return = self::SELECT('treatments.*')
+                        ->WHERE('treatment_status','=', 'Pending');
+
+        $return = $return->count();
+
+        return $return;
+
+    }
+
 
 }

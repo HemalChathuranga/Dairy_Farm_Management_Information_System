@@ -92,4 +92,17 @@ class PregnancyModel extends Model
 
     }
 
+    
+    static public function getDelDueCount($firstDayofWeek, $lastDayofWeek){
+
+        $return = self::SELECT('pregnancies.*')
+                        ->WHERE('pregnancy_status','=', 'Pregnant')
+                        ->WHERE('estimated_delivery_date','>=', $firstDayofWeek)
+                        ->WHERE('estimated_delivery_date','<=', $lastDayofWeek);
+
+        $return = $return->count();
+
+        return $return;
+    }
+
 }

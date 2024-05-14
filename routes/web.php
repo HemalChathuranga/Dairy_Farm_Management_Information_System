@@ -30,7 +30,7 @@ use App\Http\Controllers\MedicalStaffController;
 // Route::get('/1', [EmailController::class, 'sendNewAnimalEmail']);
 
 // Route::get('/1', function () {
-//     return view('admin.animal.edit');
+//     return view('test');
 // });
 
 
@@ -42,7 +42,9 @@ Route::get('logout', [AuthController::class, 'authLogout']);
 
 // <--- Admin Middleware Group -->
 Route::group(['middleware' => 'admin'], function(){
+
     Route::get('admin/dashboard', [DashboardController::class, 'index']);
+    
     Route::get('admin/admin/list', [AdminController::class, 'index']);
     Route::get('admin/admin/add', [AdminController::class, 'create']);
     Route::post('admin/admin/add', [AdminController::class, 'store']);
@@ -182,15 +184,13 @@ Route::group(['middleware' => 'admin'], function(){
         return view('animal.animalHealth.treatment.qr-scanner');
     });
 
-
-    
-
 });
 
 
 
 // <--- Manager Middleware Group -->
 Route::group(['middleware' => 'manager'], function(){
+
     Route::get('manager/dashboard', [DashboardController::class, 'index']);
 
 
@@ -245,14 +245,13 @@ Route::group(['middleware' => 'manager'], function(){
     Route::post('manager/milkParlor/milking_info/{id}/save', [MilkingController::class, 'update']);
 
     
-    
 });
-
 
 
 
 // <--- Office Staff  Middleware Group -->
 Route::group(['middleware' => 'officeStaff'], function(){
+
     Route::get('officeStaff/dashboard', [DashboardController::class, 'index']);
 
 
@@ -269,10 +268,9 @@ Route::group(['middleware' => 'officeStaff'], function(){
 });
 
 
-
-
 // <--- Medical Staff Middleware Group -->
 Route::group(['middleware' => 'medicalStaff'], function(){
+
     Route::get('medicalStaff/dashboard', [DashboardController::class, 'index']);
 
 
@@ -325,18 +323,14 @@ Route::group(['middleware' => 'medicalStaff'], function(){
     });
     
 
-    
-    
 });
-
 
 
 
 // <--- Field Staff  Middleware Group -->
 Route::group(['middleware' => 'fieldStaff'], function(){
+
     Route::get('fieldStaff/dashboard', [DashboardController::class, 'index']);
-
-
 
     //Milking features in Field Staff
     Route::get('fieldStaff/milkParlor/add_milking_queue', [MilkingController::class, 'indexTempRec']);
@@ -357,29 +351,22 @@ Route::group(['middleware' => 'fieldStaff'], function(){
 
     //Milking Info. in Field Staff
     Route::get('fieldStaff/milkParlor/milking_info', [MilkingController::class, 'index']);
-
-
-    
-    
+  
 });
-
-
 
 
 // <--- Stores Staff Middleware Group -->
 Route::group(['middleware' => 'storesStaff'], function(){
+
     Route::get('storesStaff/dashboard', [DashboardController::class, 'index']);
 
-
-    
-    
 });
-
 
 
 
 //Middleware group for all authenticated users
 Route::group(['middleware' => 'user'], function(){
+    
     Route::get('profile', [UserController::class, 'showProfile']);
     Route::get('change_password', [UserController::class, 'show_change_password']);
     Route::post('change_password', [UserController::class, 'update_change_password']);

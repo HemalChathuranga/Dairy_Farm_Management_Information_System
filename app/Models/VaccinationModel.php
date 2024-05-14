@@ -81,4 +81,19 @@ class VaccinationModel extends Model
     }
 
     
+
+    static public function getVacDueCount($firstDayofWeek, $lastDayofWeek){
+
+        $return = self::SELECT('vaccinations.*')
+                        ->WHERE('status','=', 'Incomplete')
+                        ->WHERE('next_vac_date','>=', $firstDayofWeek)
+                        ->WHERE('next_vac_date','<=', $lastDayofWeek);
+
+        $return = $return->count();
+
+        return $return;
+
+    }
+
+    
 }
