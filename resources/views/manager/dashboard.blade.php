@@ -192,7 +192,7 @@
                 <span class="info-box-icon"><i class="fa-solid fa-cloud-sun"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Morning Yield(l) - (%)</span>
-                  <span class="info-box-number">{{ $todayMorMilk }} l - ({{ number_format(($todayMorMilk/($todayMorMilk+$todayEveMilk)*100), 2) }} %)</span>
+                  <span class="info-box-number">{{ $todayMorMilk }} l - ({{ (($todayMorMilk+$todayEveMilk) == 0) ? '0.00': number_format(($todayMorMilk/($todayMorMilk+$todayEveMilk)*100), 2) }} %)</span>
                 </div>
               </div>
             </a>
@@ -202,7 +202,7 @@
                 <span class="info-box-icon"><i class="fa-solid fa-cloud-moon"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Evening Yield(l) - (%)</span>
-                  <span class="info-box-number">{{ $todayEveMilk }} l - ({{ number_format(($todayEveMilk/($todayMorMilk+$todayEveMilk)*100), 2) }} %)</span>
+                  <span class="info-box-number">{{ $todayEveMilk }} l - ({{ (($todayMorMilk+$todayEveMilk) == 0) ? '0.00': number_format(($todayEveMilk/($todayMorMilk+$todayEveMilk)*100), 2) }} %)</span>
                 </div>
               </div>
             </a>
@@ -217,7 +217,7 @@
                 <span class="info-box-icon"><i class="fa-solid fa-cloud-sun"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Morning Yield(l) - (%)</span>
-                  <span class="info-box-number">{{ $weekMorMilk }} l - ({{ number_format(($weekMorMilk/($weekMorMilk+$weekEveMilk)*100), 2) }} %)</span>
+                  <span class="info-box-number">{{ $weekMorMilk }} l - ({{ (($weekMorMilk+$weekEveMilk) == 0) ? '0.00': number_format(($weekMorMilk/($weekMorMilk+$weekEveMilk)*100), 2) }} %)</span>
                 </div>
               </div>
             </a>
@@ -227,7 +227,7 @@
                 <span class="info-box-icon"><i class="fa-solid fa-cloud-moon"></i></span>
                 <div class="info-box-content">
                   <span class="info-box-text">Evening Yield(l) - (%)</span>
-                  <span class="info-box-number">{{ $weekEveMilk }} l - ({{ number_format(($weekEveMilk/($weekMorMilk+$weekEveMilk)*100), 2) }} %)</span>
+                  <span class="info-box-number">{{ $weekEveMilk }} l - ({{ (($weekMorMilk+$weekEveMilk) == 0) ? '0.00': number_format(($weekEveMilk/($weekMorMilk+$weekEveMilk)*100), 2) }} %)</span>
                 </div>
               </div>
             </a>
