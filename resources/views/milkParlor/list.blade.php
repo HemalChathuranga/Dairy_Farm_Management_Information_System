@@ -61,6 +61,7 @@
         <!-- /.row -->
         <div class="row">
           <div class="col-12">
+            <p><sub>(If the daily volume < 25 - <i class="fas fa-thumbs-up text-success"></i> or else - <i class="fas fa-thumbs-down text-danger"></i>)</sub></p>
             <div class="card">
               <div class="card-header">
                 <div class="card-tools">
